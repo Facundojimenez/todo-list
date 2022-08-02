@@ -26,7 +26,7 @@ app.use(session({
 app.use(passport.initialize());
 app.use(passport.session());
 
-
+app.use(express.urlencoded({extended: false}));
 app.use(cors());
 app.use(morgan('dev'))
 app.use(express.json());

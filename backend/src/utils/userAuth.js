@@ -1,14 +1,16 @@
 const passport = require('passport');
+const bcrypt = require('bcrypt');
 const LocalStrategy = require('passport-local').Strategy;
-
 const { getUserByIdService,searchUserByUsernameService, addUserService} = require("../services/usersServices")
 
+const SALT_ROUNDS = 10;
 
  passport.use("local-login", new LocalStrategy((username, password, done) => {
-    const buscarUser = async (username) =>{
-        const user = await searchUserByUsernameService(username);
-        
-        if(!user){ ///no se encontró el usuario
+     const buscarUser = async (username) =>{
+         const user = await searchUserByUsernameService(username);
+         
+         if(!user){ ///no se encontró el usuario
+            console.log("user not found")
             done(null, false);
             return;
         }
@@ -24,7 +26,7 @@ const { getUserByIdService,searchUserByUsernameService, addUserService} = requir
 
     }
 
-    buscarUser(user);
+    buscarUser(username);
 }))
 
 passport.use("local-signup", new LocalStrategy({
@@ -33,25 +35,25 @@ passport.use("local-signup", new LocalStrategy({
     passReqToCallback: true
 }, (req, username, password, done) => {
     const buscarUser = async (username) =>{
+        
         const user = await searchUserByUsernameService(username);
-
         if(user){ ///el usuario ya existe
             done(null, false);
             return;
         }
 
-        bcrypt.hash(password, saltRounds, async (err, hash) => {
+        bcrypt.hash(password, SALT_ROUNDS, async (err, hash) => {
             const newUser = {
-                ...user,
+                ...req.body,
                 password: hash
             }
             const createdUser = await addUserService(newUser);
     
             done(null, createdUser)
         });
+        
 
     }
-
     buscarUser(username)
 }))
 
@@ -74,17 +76,26 @@ passport.deserializeUser(async (id, done) => {
     res.redirect("/login")
 }
 
-const login = () => {
-    passport.authenticate('local', {
-         failureRedirect: '/login' 
+const login = (req, res) => {
+    // console.log(req)
+    // console.log(res)
+    const handleLogin = passport.authenticate("local-login", {
+        successRedirect: "/api/users",
+        failureRedirect: '/login/error' 
+    }, () => {
+        // console.log(res + "")
+        res.redirect("/api/users")
+        return;
     });
+    return handleLogin(req, res);
 }
 
-const signup = () => {
-    passport.authenticate("local-signup", {
-        successRedirect: "/",
+const signup = (req, res) => {
+    const handleSignup = passport.authenticate("local-signup", {
+        successRedirect: "/api/users",
         failureRedirect: "/signup/error"
     })
+    return handleSignup(req, res);
 }
 
 module.exports = {
