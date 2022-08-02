@@ -2,6 +2,10 @@ import {Paper, Box, Typography, Grid, TextField, Button, Stack} from "@mui/mater
 import { makeStyles } from '@mui/styles';
 import CustomTheme from "../context/CustomTheme";
 import BrandLogo from "./BrandLogo";
+import Axios from "axios";
+import config from "../utils/config";
+import { useState } from "react";
+import {actualizarCamposForm} from "../utils/formFunctions";
 
 const useStyles = makeStyles({
     formContainer:{
@@ -28,15 +32,23 @@ const useStyles = makeStyles({
     }
 })
 
-
-
 const LoginForm = () =>{
     const classes = useStyles();
 
-    const handleSubmit = () =>{
+    const [userData, setUserData] = useState({
+        username: "",
+        password: ""
+    });
 
+    const handleSubmit = async (event) =>{
+        const response = await Axios.post(config.BACKEND_BASE_API_URL + "/users/login", userData);
+
+        console.log(response);
     }
 
+    const handleInputChange = (event) =>{
+        actualizarCamposForm(event, userData, setUserData);
+    };
 
     return (
         <>
@@ -49,14 +61,14 @@ const LoginForm = () =>{
                     <form>
                         <Grid container spacing={4}>
                             <Grid item xs={12} md={12}>
-                                <TextField fullWidth id="username" label="Nombre de usuario" variant="outlined" />
+                                <TextField fullWidth id="username" label="Nombre de usuario" variant="outlined" onChange={handleInputChange}/>
                             </Grid>
                             <Grid item xs={12} md={12}>
-                                <TextField fullWidth id="password" label="Contraseña" variant="outlined"  type="password" onClick={handleSubmit}/>
+                                <TextField fullWidth id="password" label="Contraseña" variant="outlined"  type="password" onChange={handleInputChange}/>
                             </Grid>
                         </Grid>
                         <Box textAlign="center" marginTop="30px">
-                            <Button className={classes.botonEnviar} fullWidth variant="contained" color="primary">
+                            <Button className={classes.botonEnviar} fullWidth variant="contained" color="primary" onClick={handleSubmit}>
                                 INICIAR SESION
                             </Button>
                         </Box>

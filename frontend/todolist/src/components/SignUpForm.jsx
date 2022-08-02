@@ -2,6 +2,10 @@ import {Paper, Box, Stack, Typography, Grid, TextField, Button} from "@mui/mater
 import { makeStyles } from '@mui/styles';
 import CustomTheme from "../context/CustomTheme";
 import BrandLogo from "./BrandLogo";
+import Axios from "axios";
+import config from "../utils/config";
+import { useState } from "react";
+import {actualizarCamposForm} from "../utils/formFunctions";
 
 const useStyles = makeStyles({
     formContainer:{
@@ -31,6 +35,23 @@ const useStyles = makeStyles({
 
 const SignUpForm = () =>{
     const classes = useStyles();
+
+    const [userData, setUserData] = useState({
+        username: "",
+        email: "",
+        password: ""
+    });
+
+    const handleSubmit = async (event) =>{
+        const response = await Axios.post(config.BACKEND_BASE_API_URL + "/users/signup", userData);
+
+        console.log(response);
+    }
+
+    const handleInputChange = (event) =>{
+        actualizarCamposForm(event, userData, setUserData);
+    };
+
     return (
         <>
             <Paper theme={CustomTheme} className={classes.formContainer}>
@@ -42,17 +63,17 @@ const SignUpForm = () =>{
                     <form>
                         <Grid container spacing={4}>
                             <Grid item xs={12} md={12}>
-                                <TextField fullWidth id="username" label="Nombre de usuario" variant="outlined" />
+                                <TextField fullWidth id="username" label="Nombre de usuario" variant="outlined" onChange={handleInputChange}/>
                             </Grid>
                             <Grid item xs={12}>
-                                <TextField required fullWidth helperText="El email es obligatorio" id="email" label="Email" variant="outlined" /> 
+                                <TextField required fullWidth helperText="El email es obligatorio" id="email" label="Email" variant="outlined" onChange={handleInputChange}/> 
                             </Grid>
                             <Grid item xs={12} md={12}>
-                                <TextField fullWidth id="password" label="Contraseña" variant="outlined"  type="password"/>
+                                <TextField fullWidth id="password" label="Contraseña" variant="outlined"  type="password" onChange={handleInputChange}/>
                             </Grid>
                         </Grid>
                         <Box textAlign="center" marginTop="30px">
-                            <Button className={classes.botonEnviar} fullWidth variant="contained" color="primary">
+                            <Button className={classes.botonEnviar} fullWidth variant="contained" color="primary" onClick={handleSubmit}>
                                 REGISTRARSE
                             </Button>
                         </Box>
