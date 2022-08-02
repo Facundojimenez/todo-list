@@ -1,10 +1,19 @@
 const User = require("../schemas/usersSchemas")
 
-const getAllUsersDB = async () => {
+const getAllUsers_DB = async () => {
     return await User.find({})
 }
 
-const addUserDB = async (user) => {
+const getUserById_DB = async (id) => {
+    return await User.findById(id)
+}
+
+const searchUserByUsername_DB = async (username) => {
+    console.log(username)
+    return await User.findOne({username: username})
+}
+
+const addUser_DB = async (user) => {
     const newUser = new User({
         ...user
     });
@@ -12,6 +21,8 @@ const addUserDB = async (user) => {
 }
 
 module.exports = {
-    getAllUsersDB,
-    addUserDB
+    getAllUsers_DB,
+    getUserById_DB,
+    searchUserByUsername_DB,
+    addUser_DB
 }

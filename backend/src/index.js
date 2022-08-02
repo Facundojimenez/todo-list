@@ -4,17 +4,35 @@ const usersRoutes = require("./routes/usersRoutes")
 const path = require('path')
 const dotenv = require("dotenv").config({path: path.resolve(__dirname, "./config/config.env")});
 const mongoDB = require("./db/mongoConnection");
-const morgan = require('morgan')
-
+const morgan = require('morgan');
 const cors = require("cors");
-
+const session = require("express-session");
+const cookieParser = require("cookie-parser");
+const MongoStore = require("connect-mongo");
+const passport = require("passport")
 /* --------------- MIDDLEWARES ------*/
  
+app.use(cookieParser());
+app.use(session({
+    store: MongoStore.create({
+        mongoUrl: process.env.MONGO_CONNECTION_STRING,
+        ttl: 60
+    }),
+    secret: process.env.SESSION_SECRET,
+    resave: true,
+    saveUninitialized: true
+}));
+
+app.use(passport.initialize());
+app.use(passport.session());
+
+
 app.use(cors());
 app.use(morgan('dev'))
 app.use(express.json());
- app.use("/api/users", usersRoutes);
- 
+app.use("/api/users", usersRoutes);
+
+
  /* -------------------------------- */
 
 
