@@ -4,15 +4,28 @@ import {BrowserRouter, Routes, Route} from "react-router-dom";
 import CustomTheme from "./context/CustomTheme";
 import { ThemeProvider } from "@emotion/react";
 
+import { makeStyles } from "@mui/styles";
+
+const useStyles = makeStyles({
+  body: {
+    backgroundColor: CustomTheme.palette.background.default,
+    height: "100vh"
+  } 
+})
+
+
 function App() {
+  const classes = useStyles();
   return (
     <>
-      <ThemeProvider theme={CustomTheme}>
+      <ThemeProvider theme={CustomTheme} >
         <BrowserRouter>
-          <Routes>
-            <Route path="/login" element={ <Login/>}/> 
-            <Route path="/signup" element={ <SignUp/>}/> 
-          </Routes>
+          <div className={classes.body}>
+            <Routes>
+              <Route path="/login" element={ <Login/>}/> 
+              <Route path="/signup" element={ <SignUp/>}/> 
+            </Routes>
+          </div>
         </BrowserRouter>
       </ThemeProvider>
     </>

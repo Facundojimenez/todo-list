@@ -2,9 +2,12 @@ import { createTheme } from "@mui/material";
 import { orange } from "@mui/material/colors";
 
 const CustomTheme = createTheme({
-    status: {
-      danger: orange[500],
-    },
+    palette: {
+      background: {
+        paper: "#ffffff",
+        default: "#dddddd"
+      }
+    }
   });
 
   export default CustomTheme;

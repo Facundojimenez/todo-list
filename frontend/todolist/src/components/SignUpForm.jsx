@@ -1,25 +1,26 @@
-import {Paper, Box, Typography, Grid, TextField, Button} from "@mui/material"
+import {Paper, Box, Stack, Typography, Grid, TextField, Button} from "@mui/material"
 import { makeStyles } from '@mui/styles';
-import SendIcon from '@mui/icons-material/Send';
+import CustomTheme from "../context/CustomTheme";
+import BrandLogo from "./BrandLogo";
 
 const useStyles = makeStyles({
     formContainer:{
         display: "flex",
         justifyContent: "center",
         padding: "16px",
-        minHeight: "500px",
+        minHeight: "400px",
         maxHeight: "600px",
-        maxWidth: "600px"
+        maxWidth: "400px"
     },
     formInnerContainer:{
         display: "flex",
         flexDirection: "column",
         justifyContent: "space-evenly",
         alignItems: "center",
-        width: "75%"
+        width: "85%"
     },
     botonEnviar:{
-        marginTop: "32px"
+        marginTop: "320px"
     },
     backdrop:{
         zIndex: 99,
@@ -32,33 +33,59 @@ const SignUpForm = () =>{
     const classes = useStyles();
     return (
         <>
-            <Paper className={classes.formContainer}>
-                <Box className={classes.formInnerContainer}>
-                    <Box mb={3}>
-                        <Typography variant="h4" element="h4" color="primary">
-                            ¡Registrarse!
-                        </Typography>
-                    </Box>
+            <Paper theme={CustomTheme} className={classes.formContainer}>
+                <Stack className={classes.formInnerContainer}>
+                    <BrandLogo/>
+                    <Typography variant="h4" element="h4" color="primary">
+                        ¡Registrarse!
+                    </Typography>
                     <form>
                         <Grid container spacing={4}>
                             <Grid item xs={12} md={12}>
-                                <TextField fullWidth id="username" label="username" variant="outlined" />
+                                <TextField fullWidth id="username" label="Nombre de usuario" variant="outlined" />
                             </Grid>
                             <Grid item xs={12}>
                                 <TextField required fullWidth helperText="El email es obligatorio" id="email" label="Email" variant="outlined" /> 
                             </Grid>
                             <Grid item xs={12} md={12}>
-                                <TextField fullWidth id="password" label="password" variant="outlined" />
+                                <TextField fullWidth id="password" label="Contraseña" variant="outlined"  type="password"/>
                             </Grid>
                         </Grid>
                         <Box textAlign="center" marginTop="30px">
-                            <Button className={classes.botonEnviar} size="large" variant="contained" color="primary" endIcon={<SendIcon/>}>
-                                Enviar
+                            <Button className={classes.botonEnviar} fullWidth variant="contained" color="primary">
+                                REGISTRARSE
                             </Button>
                         </Box>
                     </form>
-                </Box>
+                </Stack>
             </Paper>
+
+            {/* <Paper theme={CustomTheme} className={classes.formContainer}>
+                <Stack className={classes.formInnerContainer}>
+                    <BrandLogo/>
+                    <Typography variant="h4" element="h4" color="primary">
+                        ¡Registrarse!
+                    </Typography>
+                    <form>
+                        <Grid container spacing={4}>
+                            <Grid item xs={12} md={12}>
+                                <TextField fullWidth id="username" label="Nombre de usuario" variant="outlined" />
+                            </Grid>
+                            <Grid item xs={12}>
+                                <TextField required fullWidth helperText="El email es obligatorio" id="email" label="Email" variant="outlined" /> 
+                            </Grid>
+                            <Grid item xs={12} md={12}>
+                                <TextField fullWidth id="password" label="Contraseña" variant="outlined"  type="password"/>
+                            </Grid>
+                        </Grid>
+                        <Box textAlign="center" marginTop="30px">
+                            <Button className={classes.botonEnviar} fullWidth variant="contained" color="primary">
+                                REGISTRARSE
+                            </Button>
+                        </Box>
+                    </form>
+                </Stack>
+            </Paper> */}
         </>
     )
     
