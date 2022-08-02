@@ -7,7 +7,7 @@ const usersSchema  = new Schema({
     username:  String,
     email:   String,
     password: String
-}, { _id: false });
+}, { _id: false , timestamps: true});
 
 usersSchema.plugin(AutoIncrement);
 ///Este plugin hace que el ID automatico de mongodb pase a ser un numero entero autoincrementado

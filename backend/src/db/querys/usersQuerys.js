@@ -5,7 +5,6 @@ const getAllUsersDB = async () => {
 }
 
 const addUserDB = async (user) => {
-    console.log(user)
     const newUser = new User({
         ...user
     });
