@@ -3,7 +3,7 @@ const {getAllUsers, getUserById, searchUserByUsername, addUser} = require("../co
 const userAuth = require("../utils/userAuth")
 const router = Router();
 
-router.get("/", getAllUsers);
+router.get("/" ,getAllUsers);
 router.get("/search", searchUserByUsername);
 router.get("/:id", getUserById);
 router.post("/", addUser);

@@ -17,6 +17,7 @@ const SALT_ROUNDS = 10;
 
         bcrypt.compare(password, user.password, function(err, result) {
             if(!result){ ///no coincide la contraseña
+                console.log("contraSEña incorrecta")
                 done(null, false)
                 return;
             }
@@ -73,7 +74,7 @@ passport.deserializeUser(async (id, done) => {
         return next()
     }
 
-    res.redirect("/login")
+    res.redirect("/login/error")
 }
 
 const login = (req, res) => {
@@ -83,7 +84,6 @@ const login = (req, res) => {
         successRedirect: "/api/users",
         failureRedirect: '/login/error' 
     }, () => {
-        // console.log(res + "")
         res.redirect("/api/users")
         return;
     });
