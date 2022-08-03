@@ -41,7 +41,12 @@ const LoginForm = () =>{
     });
 
     const handleSubmit = async (event) =>{
-        const response = await Axios.post(config.BACKEND_BASE_API_URL + "/users/login", userData);
+        const response = await Axios.post(config.BACKEND_BASE_API_URL + "/users/login", userData, {withCredentials: true});
+
+        if(response.status === 200){
+            //entro a la pagina
+        }
+
 
         console.log(response);
     }
