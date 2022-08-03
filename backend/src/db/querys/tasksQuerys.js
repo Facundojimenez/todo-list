@@ -1,4 +1,4 @@
-const Task = require("../schemas/tasksSchemas")
+const {Task} = require("../schemas/tasksSchemas")
 
 const getAllTasks_DB = async () => {
     return await Task.find({})

@@ -2,6 +2,7 @@ const express = require("express");
 const app = express();
 const usersRoutes = require("./routes/usersRoutes");
 const tasksRoutes = require("./routes/tasksRoutes");
+const stagesRoutes = require("./routes/stagesRoutes");
 const path = require('path')
 const dotenv = require("dotenv").config({path: path.resolve(__dirname, "./config/config.env")});
 const mongoDB = require("./db/mongoConnection");
@@ -40,6 +41,7 @@ app.use(cors({
 app.use(morgan('dev'))
 app.use("/api/users", usersRoutes);
 app.use("/api/tasks", tasksRoutes);
+app.use("/api/stages", stagesRoutes);
 
 
  /* -------------------------------- */
