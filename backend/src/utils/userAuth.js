@@ -5,20 +5,17 @@ const { getUserByIdService,searchUserByUsernameService, addUserService} = requir
 
 const SALT_ROUNDS = 10;
 
- passport.use("local-login", new LocalStrategy((username, password, done) => {
+passport.use("local-login", new LocalStrategy((username, password, done) => {
      const buscarUser = async (username) =>{
          const user = await searchUserByUsernameService(username);
          
          if(!user){ ///no se encontró el usuario
-            console.log("user not found")
-            done(null, false);
-            return;
+            return done({message: "USER_NOT_FOUND"}, null);
         }
 
         bcrypt.compare(password, user.password, function(err, result) {
             if(!result){ ///no coincide la contraseña
-                console.log("contraSEña incorrecta")
-                done(null, false)
+                done({ message: "WRONG_PASSWORD_OR_USER"}, false)
                 return;
             }
 
@@ -39,8 +36,7 @@ passport.use("local-signup", new LocalStrategy({
         
         const user = await searchUserByUsernameService(username);
         if(user){ ///el usuario ya existe
-            done(null, false);
-            return;
+            return done("USER_EXISTS", null)
         }
 
         bcrypt.hash(password, SALT_ROUNDS, async (err, hash) => {
@@ -52,9 +48,8 @@ passport.use("local-signup", new LocalStrategy({
     
             done(null, createdUser)
         });
-        
-
     }
+
     buscarUser(username)
 }))
 
@@ -64,6 +59,9 @@ passport.serializeUser((user, done) => {
 
 passport.deserializeUser(async (id, done) => {
     const user = await getUserByIdService(id);
+    
+    console.log("deserialize: ")
+    console.log(user)
     done(null, user);
 })
 
@@ -78,22 +76,44 @@ passport.deserializeUser(async (id, done) => {
 }
 
 const login = (req, res) => {
-    // console.log(req)
-    // console.log(res)
-    const handleLogin = passport.authenticate("local-login", {
-        successRedirect: "/api/users",
-        failureRedirect: '/login/error' 
-    }, () => {
-        res.redirect("/api/users")
-        return;
+
+    const handleLogin = passport.authenticate("local-login", (err, user) => {
+        if(err){
+            return res.status(400).json({
+                message: `No se pudo iniciar sesión: ${err.message}`
+            })
+        }
+
+        if(!user){
+            return res.status(500).json({
+                message: "No se pudo iniciar sesion: ERROR INESPERADO"
+            })
+        }
+
+        res.status(200).json({
+            message: "Se ha iniciado sesion correctamente"
+        })
     });
     return handleLogin(req, res);
 }
 
 const signup = (req, res) => {
-    const handleSignup = passport.authenticate("local-signup", {
-        successRedirect: "/api/users",
-        failureRedirect: "/signup/error"
+    const handleSignup = passport.authenticate("local-signup", (err, user) => {
+        if(err){
+            return res.status(400).json({
+                message: `No se pudo crear el usuario: ${err.message}`
+            })
+        }
+
+        if(!user){
+            return res.status(500).json({
+                message: "No se pudo crear el usuario: ERROR INESPERADO"
+            })
+        }
+
+        res.status(200).json({
+            message: "Usuario creado exitosamente"
+        })
     })
     return handleSignup(req, res);
 }
