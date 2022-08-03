@@ -30,6 +30,7 @@ passport.use("local-login", new LocalStrategy((username, password, done) => {
 passport.use("local-signup", new LocalStrategy({
     usernameField: "username",
     passwordField: "password",
+    session: true,
     passReqToCallback: true
 }, (req, username, password, done) => {
     const buscarUser = async (username) =>{
@@ -54,6 +55,7 @@ passport.use("local-signup", new LocalStrategy({
 }))
 
 passport.serializeUser((user, done) => {
+    console.log("serialize: ")
     done(null, user);
 })
 
@@ -75,10 +77,13 @@ passport.deserializeUser(async (id, done) => {
     res.redirect("/login/error")
 }
 
-const login = (req, res) => {
+const login = (req, res, next)  => {
 
     const handleLogin = passport.authenticate("local-login", (err, user) => {
+
+        console.log(user)
         if(err){
+            next()
             return res.status(400).json({
                 message: `No se pudo iniciar sesión: ${err.message}`
             })
@@ -97,7 +102,9 @@ const login = (req, res) => {
 
     });
 
-    return handleLogin(req, res);
+    // console.log(res)
+
+    return handleLogin(req, res, next);
 }
 
 const signup = (req, res) => {
@@ -117,6 +124,8 @@ const signup = (req, res) => {
         res.status(200).json({
             message: "Usuario creado exitosamente"
         })
+
+        req.login(user)
     })
     return handleSignup(req, res);
 }

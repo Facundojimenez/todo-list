@@ -13,6 +13,9 @@ const passport = require("passport")
 /* --------------- MIDDLEWARES ------*/
  
 app.use(cookieParser());
+app.use(express.urlencoded({extended: false}));
+app.use(express.json());
+
 app.use(session({
     store: MongoStore.create({
         mongoUrl: process.env.MONGO_CONNECTION_STRING,
@@ -20,20 +23,21 @@ app.use(session({
     }),
     secret: process.env.SESSION_SECRET,
     resave: true,
-    saveUninitialized: true
+    saveUninitialized: false,
+    cookie: { 
+        secure: false
+    }
 }));
 
 app.use(passport.initialize());
 app.use(passport.session());
-app.use(passport.authenticate('session'));
+// app.use(passport.authenticate('session'));
 
-app.use(express.urlencoded({extended: false}));
 app.use(cors({
     origin: "http://localhost:3000",
     credentials: true
 }));
 app.use(morgan('dev'))
-app.use(express.json());
 app.use("/api/users", usersRoutes);
 
 
