@@ -1,6 +1,7 @@
 const express = require("express");
 const app = express();
-const usersRoutes = require("./routes/usersRoutes")
+const usersRoutes = require("./routes/usersRoutes");
+const tasksRoutes = require("./routes/tasksRoutes");
 const path = require('path')
 const dotenv = require("dotenv").config({path: path.resolve(__dirname, "./config/config.env")});
 const mongoDB = require("./db/mongoConnection");
@@ -31,7 +32,6 @@ app.use(session({
 
 app.use(passport.initialize());
 app.use(passport.session());
-// app.use(passport.authenticate('session'));
 
 app.use(cors({
     origin: "http://localhost:3000",
@@ -39,6 +39,7 @@ app.use(cors({
 }));
 app.use(morgan('dev'))
 app.use("/api/users", usersRoutes);
+app.use("/api/tasks", tasksRoutes);
 
 
  /* -------------------------------- */
