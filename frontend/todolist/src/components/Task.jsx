@@ -4,14 +4,16 @@ import CardContent from '@mui/material/CardContent';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import { useState } from 'react';
-import { Dialog, DialogTitle, DialogContent, DialogContentText, DialogActions, TextField } from '@mui/material';
+import { Dialog, DialogTitle, DialogContent, DialogContentText, DialogActions, TextField, Box,Grid } from '@mui/material';
 import {actualizarCamposForm} from  "../utils/formFunctions"
 
-export default function Task({title, description}) {
+import { updateTaskFromStage } from "../utils/updateData";
+import { deleteTaskFromStage } from '../utils/deleteData';
+
+export default function Task(props) {
   const [open, setOpen] = useState(false);
   const [taskData, setTaskData] = useState({
-      title: title,
-      description: description
+      ...props
   })
 
   const handleClickOpen = () => {
@@ -26,6 +28,18 @@ export default function Task({title, description}) {
     actualizarCamposForm(event, taskData, setTaskData);
     console.log(taskData)
   };
+
+  const updateTask = async () =>{
+    await updateTaskFromStage(taskData);
+    handleClose();
+  }
+
+  const deleteTask = async () =>{
+    console.log(taskData)
+    await deleteTaskFromStage(taskData.stageId, taskData.taskId);
+    handleClose();
+  }
+
   
   return (
     <>
@@ -79,8 +93,17 @@ export default function Task({title, description}) {
           />
         </DialogContent>
         <DialogActions>
-          <Button onClick={handleClose}>Cancelar</Button>
-          <Button onClick={handleClose}>Guardar</Button>
+          <Grid container>
+            <Grid item xs={4} justifyContent="space-between">
+              <Button variant="outlined" color="error" onClick={deleteTask}>Eliminar</Button>
+            </Grid>
+            <Grid item xs={8}>
+            <Box display="flex" justifyContent="flex-end">
+              <Button onClick={handleClose}>Cancelar</Button>
+              <Button onClick={updateTask}>Guardar</Button>
+            </Box>
+            </Grid>
+          </Grid>
         </DialogActions>
       </Dialog>
 

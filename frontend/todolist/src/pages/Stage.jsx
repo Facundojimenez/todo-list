@@ -10,7 +10,8 @@ const styles = {
     }
 }
 
-const Stage = ({title, tasks}) =>{
+const Stage = ({title, tasks, stageId}) =>{
+
     return(
         <Box>
             <Box style={{backgroundColor: "blue"}}> 
@@ -20,9 +21,9 @@ const Stage = ({title, tasks}) =>{
             </Box>
             <Stack sx={styles.stageContainer} spacing={2}>
                 {
-                    tasks.map(tarea => {
+                    tasks.map(task => {
                         return(
-                            <Task title={tarea.title} description={tarea.description} key={tarea.id}/>
+                            <Task title={task.title} description={task.description} order={task.order} stageId={stageId} taskId={task._id} key={task._id}/>
                         )
                     })
                 }
