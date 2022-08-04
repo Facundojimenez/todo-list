@@ -28,7 +28,7 @@ const updateDashboardFromUser = async (req, res) => {
 
 const deleteDashboardFromUser = async (req, res) => {
     const userId = parseInt(req.params.id); 
-    const dashboardId = req.body.dashboardId;
+    const dashboardId = parseInt(req.query.dashboardId)
     const user = await deleteDashboardFromUserService(userId, dashboardId);
     res.json(user);
 }
