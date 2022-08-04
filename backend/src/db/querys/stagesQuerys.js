@@ -45,6 +45,8 @@ const addTaskToStage_DB = async (stageId, task) => {
 const deleteTaskFromStage_DB = async (stageId, taskId) => {
     const stageUpdate = await getStageById_DB(stageId);
 
+    console.log(stageId + "  -  "  + taskId)
+
     stageUpdate.tasks = stageUpdate.tasks.filter( taskIteration => taskIteration._id !== taskId)
     return await stageUpdate.save()
 }

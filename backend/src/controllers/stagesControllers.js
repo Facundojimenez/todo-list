@@ -41,7 +41,7 @@ const deleteStageById = async (req, res) => {
 
 const deleteTaskFromStage = async (req, res) => {
     const stageId = parseInt(req.params.id); 
-    const taskId = req.body.taskId;
+    const taskId = parseInt(req.query.taskId);
     const stages = await deleteTaskFromStageService(stageId, taskId);
     res.json(stages);
 }
