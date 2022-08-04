@@ -1,5 +1,8 @@
 import { Stack, Box, Typography } from "@mui/material";
+import { useContext } from "react";
+// import { useEffect, useState } from "react";
 import Task from "../components/Task";
+import UserContext from "../context/UserContext";
 
 const styles = {
     stageContainer: {
@@ -11,7 +14,6 @@ const styles = {
 }
 
 const Stage = ({title, tasks, stageId}) =>{
-
     return(
         <Box>
             <Box style={{backgroundColor: "blue"}}> 

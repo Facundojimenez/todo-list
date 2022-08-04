@@ -48,22 +48,7 @@ export default function Task(props) {
   return (
     <>
       {/* tarea */}
-      <Card>
-        <CardContent>
-          <Typography variant="h5" component="div">
-            {taskData.title}
-          </Typography>
-          <Typography sx={{ mb: 1.5 }} color="text.secondary">
-            adjective
-          </Typography>
-          <Typography variant="body2">
-            {taskData.description}
-          </Typography>
-        </CardContent>
-        <CardActions>
-          <Button size="small" onClick={handleClickOpen}>Learn More</Button>
-        </CardActions>
-      </Card>
+      <Button onClick={handleClose}>Cancelar</Button>
 
       {/* Menu que se abre */}
       <Dialog open={open} onClose={handleClose} fullWidth={true} maxWidth="sm">

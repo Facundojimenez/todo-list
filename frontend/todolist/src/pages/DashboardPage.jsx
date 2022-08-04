@@ -5,6 +5,8 @@ import Stage from "./Stage";
 import {Typography} from "@mui/material";
 import { useState, useEffect } from "react";
 import {fetchStages} from "../utils/fetchData"
+import { useContext } from "react";
+import UserContext from "../context/UserContext";
 
 const styles = {
     stagesContainer: {
@@ -13,17 +15,20 @@ const styles = {
 }
 
 const DashboardPage = () => {
-    const [stages, setStages] = useState([]);
+    ///ESTE NO ES EL DEL CONTEXTO, POR AHI lo saco
+    // const [stagess, setStages] = useState([]);
 
-    useEffect(() => {
-        const getStages = async () => {
-            const stagesData = await fetchStages();
-            setStages(stagesData)
-            console.log(stagesData)
-        }
-        getStages();
     
-    }, []);
+    const {currentDashboard} = useContext(UserContext)
+    // console.log(currentDashboard)
+
+    // useEffect(() => {
+    //     const getStages = async () => {
+    //         const stagesData = await fetchStages();
+    //         setStages(stagesData)
+    //     }
+    //     getStages();
+    // }, []);
 
     return(
         <>
@@ -34,7 +39,7 @@ const DashboardPage = () => {
             </Typography>
             <Stack direction="row" justifyContent="space-around" alignItems="stretch" spacing={2}> 
                     {
-                        stages.map(stage => {
+                        !currentDashboard.stages ? "loading" : currentDashboard.stages.map(stage => {
                             return (
                                 <Stage title={stage.title} tasks={stage.tasks} stageId={stage._id} key={stage._id} /> 
                             )

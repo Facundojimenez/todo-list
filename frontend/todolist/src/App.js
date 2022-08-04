@@ -4,7 +4,7 @@ import DashboardPage from "./pages/DashboardPage";
 import {BrowserRouter, Routes, Route} from "react-router-dom";
 import CustomTheme from "./context/CustomTheme";
 import { ThemeProvider } from "@emotion/react";
-
+import {UserProvider}  from "./context/UserContext";
 import { makeStyles } from "@mui/styles";
 
 const useStyles = makeStyles({
@@ -19,17 +19,19 @@ function App() {
   const classes = useStyles();
   return (
     <>
-      <ThemeProvider theme={CustomTheme} >
-        <BrowserRouter>
-          <div className={classes.body}>
-            <Routes>
-              <Route path="/login" element={ <Login/>}/> 
-              <Route path="/signup" element={ <SignUp/>}/> 
-              <Route path="/dashboard" element={ <DashboardPage/>}/> 
-            </Routes>
-          </div>
-        </BrowserRouter>
-      </ThemeProvider>
+      <UserProvider>
+        <ThemeProvider theme={CustomTheme} >
+          <BrowserRouter>
+            <div className={classes.body}>
+              <Routes>
+                <Route path="/login" element={ <Login/>}/> 
+                <Route path="/signup" element={ <SignUp/>}/> 
+                <Route path="/dashboard" element={ <DashboardPage/>}/> 
+              </Routes>
+            </div>
+          </BrowserRouter>
+        </ThemeProvider>
+      </UserProvider>
     </>
   );
 }
