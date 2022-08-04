@@ -1,15 +1,15 @@
 const {Router} = require("express");
-const {getAllUsers, getUserById, searchUserByUsername, addUser} = require("../controllers/usersControllers")
+const {getAllUsers, getUserById, searchUserByUsername, addDashboardToUser, deleteDashboardFromUser, updateDashboardFromUser,  addUser} = require("../controllers/usersControllers")
 const passport = require('passport');
 const bcrypt = require('bcrypt');
 const LocalStrategy = require('passport-local').Strategy;
-const { getUserByIdService,searchUserByUsernameService, addUserService} = require("../services/usersServices")
+const { getUserByIdService,searchUserByUsernameService,  addUserService} = require("../services/usersServices") ///VER SI LO PUEDO SACAR!!
 const router = Router();
 
-const SALT_ROUNDS = 10;
 
 
 //--------------- PASS PORT ---
+const SALT_ROUNDS = 10;
 
 passport.use("local-login", new LocalStrategy((username, password, done) => {
      const buscarUser = async (username) =>{
@@ -82,10 +82,15 @@ const auth = (req, res, next) =>{
 
 // ------ ROUTES ----
 
-router.get("/" , auth, getAllUsers);
+router.get("/" , getAllUsers);
 router.get("/search", searchUserByUsername);
 router.get("/:id", getUserById);
 router.post("/", addUser);
+
+router.post("/addDashboard/:id", addDashboardToUser);
+router.put("/updateDashboard/:id", updateDashboardFromUser);
+router.delete("/deleteDashboard/:id", deleteDashboardFromUser);
+
 
 
 router.post("/login", passport.authenticate("local-login", { failureRedirect: "/loginTest/failed", failureMessage: true}), (req, res) => {
@@ -102,8 +107,6 @@ router.post("/signup", passport.authenticate("local-signup", { failureRedirect: 
     })
 });
 
-
-
 router.post('/logout', (req, res) => {
     req.logout((err) => {
         if (err) {
@@ -113,6 +116,6 @@ router.post('/logout', (req, res) => {
             message: "Se ha cerrado la sesion correctamente"
         })
     });
-  });
+});
 
 module.exports = router;

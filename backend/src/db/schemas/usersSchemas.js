@@ -1,12 +1,14 @@
 const mongoose = require("mongoose");
 const { Schema } = mongoose;
 const AutoIncrement = require('mongoose-sequence')(mongoose);
+const {dashboardSchema} = require("../schemas/dashboardsSchemas")
 
 const usersSchema  = new Schema({
     _id: Number,
     username:  String,
     email:   String,
-    password: String
+    password: String,
+    dashboards: [dashboardSchema]
 }, { _id: false , timestamps: true});
 
 usersSchema.plugin(AutoIncrement);

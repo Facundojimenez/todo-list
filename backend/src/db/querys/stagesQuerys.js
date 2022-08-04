@@ -52,7 +52,7 @@ const deleteTaskFromStage_DB = async (stageId, taskId) => {
 const updateTaskFromStage_DB = async (stageId, newData) => {
     const stageUpdate = await getStageById_DB(stageId);
 
-    const taskUpdate = stageUpdate.tasks.find(taskIteration => taskIteration._id === newData.id);
+    const taskUpdate = stageUpdate.tasks.find(taskIteration => taskIteration._id === newData.taskId);
     
     if(newData.title){
         taskUpdate.title = newData.title;

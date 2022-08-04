@@ -1,5 +1,5 @@
 
-const {getAllUsersService, getUserByIdService, searchUserByUsernameService, addUserService} = require("../services/usersServices")
+const {getAllUsersService, getUserByIdService, addDashboardToUserService, deleteDashboardFromUserService, updateDashboardFromUserService, searchUserByUsernameService, addUserService} = require("../services/usersServices")
 
 const getAllUsers = async (req, res) => {
     const users = await getAllUsersService();
@@ -8,14 +8,35 @@ const getAllUsers = async (req, res) => {
 
 const getUserById = async (req, res) => {
     const id = parseInt(req.params.id); 
-    const users = await getUserByIdService(id);
-    res.json(users);
+    const user = await getUserByIdService(id);
+    res.json(user);
+}
+
+const addDashboardToUser = async (req, res) => {
+    const userId = parseInt(req.params.id); 
+    const dashboard = req.body;
+    const user = await addDashboardToUserService(userId, dashboard);
+    res.json(user);
+}
+
+const updateDashboardFromUser = async (req, res) => {
+    const userId = parseInt(req.params.id); 
+    const newData = req.body;
+    const user = await updateDashboardFromUserService(userId, newData);
+    res.json(user);
+}
+
+const deleteDashboardFromUser = async (req, res) => {
+    const userId = parseInt(req.params.id); 
+    const dashboardId = req.body.dashboardId;
+    const user = await deleteDashboardFromUserService(userId, dashboardId);
+    res.json(user);
 }
 
 const searchUserByUsername = async (req, res) => {
     const username = req.query.username; 
-    const users = await searchUserByUsernameService(username);
-    res.json(users);
+    const user = await searchUserByUsernameService(username);
+    res.json(user);
 }
 
 const addUser = async (req, res) => {
@@ -27,5 +48,8 @@ module.exports = {
     getAllUsers,
     getUserById,
     searchUserByUsername,
+    addDashboardToUser,
+    deleteDashboardFromUser,
+    updateDashboardFromUser,
     addUser
 }
