@@ -1,5 +1,5 @@
 
-const {getAllStagesService, getStageByIdService, addTaskToStageService,  updateStageByIdService, deleteStageByIdService, addStageService} = require("../services/stagesServices")
+const {getAllStagesService, getStageByIdService, addTaskToStageService, deleteTaskFromStageService, updateTaskFromStageService, updateStageByIdService, deleteStageByIdService, addStageService} = require("../services/stagesServices")
 
 const getAllStages = async (req, res) => {
     const stages = await getAllStagesService();
@@ -19,6 +19,13 @@ const updateStageById = async (req, res) => {
     res.json(stage);
 }
 
+const updateTaskFromStage = async (req, res) => {
+    const id = parseInt(req.params.id); 
+    const newData = req.body;
+    const stage = await updateTaskFromStageService(id, newData);
+    res.json(stage);
+}
+
 const addTaskToStage = async (req, res) => {
     const id = parseInt(req.params.id); 
     const task = req.body;
@@ -32,6 +39,13 @@ const deleteStageById = async (req, res) => {
     res.json(stages);
 }
 
+const deleteTaskFromStage = async (req, res) => {
+    const stageId = parseInt(req.params.id); 
+    const taskId = req.body.taskId;
+    const stages = await deleteTaskFromStageService(stageId, taskId);
+    res.json(stages);
+}
+
 const addStage = async (req, res) => {
     const stage = await addStageService(req.body);
     res.json(stage);
@@ -42,6 +56,8 @@ module.exports = {
     getStageById,
     addTaskToStage,
     updateStageById,
+    updateTaskFromStage,
     deleteStageById,
+    deleteTaskFromStage,
     addStage
 }

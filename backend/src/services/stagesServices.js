@@ -1,4 +1,4 @@
-const {getAllStages_DB, getStageById_DB, deleteStageById_DB, updateStageById_DB, addTaskToStage_DB, addStage_DB} = require("../db/querys/stagesQuerys");
+const {getAllStages_DB, getStageById_DB, deleteStageById_DB, updateStageById_DB,updateTaskFromStage_DB, deleteTaskFromStage_DB, addTaskToStage_DB, addStage_DB} = require("../db/querys/stagesQuerys");
 
 const getAllStagesService = async () => {
     return await getAllStages_DB();
@@ -12,12 +12,20 @@ const updateStageByIdService = async (id, newData) => {
     return await updateStageById_DB(id, newData);
 }
 
+const updateTaskFromStageService = async (id, newData) => {
+    return await updateTaskFromStage_DB(id, newData);
+}
+
 const addTaskToStageService = async (stageId, task) => {
     return await addTaskToStage_DB(stageId, task);
 }
 
 const deleteStageByIdService = async (id) => {
     return await deleteStageById_DB(id);
+}
+
+const deleteTaskFromStageService = async (stageId, taskId) => {
+    return await deleteTaskFromStage_DB(stageId, taskId);
 }
 
 const addStageService = async (stage) => {
@@ -29,6 +37,8 @@ module.exports = {
     getStageByIdService,
     deleteStageByIdService,
     updateStageByIdService,
+    updateTaskFromStageService,
     addTaskToStageService,
+    deleteTaskFromStageService,
     addStageService
 }
