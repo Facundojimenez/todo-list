@@ -4,6 +4,8 @@ import { useContext } from "react";
 import Task from "../components/Task";
 import UserContext from "../context/UserContext";
 import TaskAdder from "../components/TaskAdder";
+import { useState } from "react";
+import { useEffect } from "react";
 
 const styles = {
     stageContainer: {
@@ -14,7 +16,19 @@ const styles = {
     }
 }
 
-const Stage = ({title, tasks, stageId}) =>{
+const Stage = ({title, taskss, stageId}) =>{
+    const {currentDashboard} = useContext(UserContext);
+
+    const [tasks, setTasks] = useState(() => {
+        const stageFind = currentDashboard.stages.find((stage) => stage._id === stageId);
+        return stageFind.tasks
+    })
+
+    useEffect(() => {
+        const stageFind = currentDashboard.stages.find((stage) => stage._id === stageId);
+        setTasks(stageFind.tasks)
+    }, [currentDashboard])
+
     return(
         <Box>
             <Box style={{backgroundColor: "blue"}}> 

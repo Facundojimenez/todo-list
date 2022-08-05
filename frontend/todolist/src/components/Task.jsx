@@ -33,15 +33,15 @@ export default function Task(props) {
   };
 
   const updateTask = async () =>{
-    await updateTaskFromStage(taskData);
     handleClose();
+    await updateTaskFromStage(taskData);
   }
 
   const deleteTask = async () =>{
     // console.log(taskData)
-    await deleteTaskFromStage(taskData.stageId, taskData.taskId);
     deleteTaskRender(taskData)
     handleClose();
+    await deleteTaskFromStage(taskData.stageId, taskData.taskId);
   }
 
   

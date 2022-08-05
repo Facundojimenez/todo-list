@@ -15,7 +15,7 @@ import AddIcon from '@mui/icons-material/Add';
 
 
 export default function TaskAdder(props) {
-  const {deleteTaskRender} = useContext(UserContext)
+  const {addTaskRender} = useContext(UserContext)
   const [open, setOpen] = useState(false);
   const [taskData, setTaskData] = useState({
       title: "",
@@ -38,8 +38,9 @@ export default function TaskAdder(props) {
 
   const createTask = async () =>{
     console.log(taskData)
-    await createTaskFromStage(taskData);
+    addTaskRender(taskData)
     handleClose();
+    await createTaskFromStage(taskData);
   }
 
 
