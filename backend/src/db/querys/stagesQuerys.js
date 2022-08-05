@@ -19,7 +19,7 @@ const updateStageById_DB = async (id, newData) => {
     if(newData.order){
         stageUpdate.order = newData.order
     }
-
+    
     if(newData.title){
         stageUpdate.title = newData.title
     }
@@ -39,7 +39,11 @@ const addTaskToStage_DB = async (stageId, task) => {
     ///me traigo el stage, le agrego la tarea y lo guardo de nuevo
     const stageUpdate = await getStageById_DB(stageId);
     stageUpdate.tasks.push(newTask);
-    return await stageUpdate.save()
+    
+
+    const res = await stageUpdate.save();
+    const createdTask = res.tasks[res.tasks.length - 1 ] // necesito retornar la tarea creada con el _id que generó mongoDB
+    return createdTask;
 }
 
 const deleteTaskFromStage_DB = async (stageId, taskId) => {
@@ -52,10 +56,17 @@ const deleteTaskFromStage_DB = async (stageId, taskId) => {
 }
 
 const updateTaskFromStage_DB = async (stageId, newData) => {
-    const stageUpdate = await getStageById_DB(stageId);
+    if(!newData){
+        return {message: "no se pasó el parametro taskID"};
+    }
 
+    const stageUpdate = await getStageById_DB(stageId);
     const taskUpdate = stageUpdate.tasks.find(taskIteration => taskIteration._id === newData.taskId);
     
+    if(!taskUpdate){
+        return {message: "no se encontro la task"};
+    }
+
     if(newData.title){
         taskUpdate.title = newData.title;
     }
@@ -70,8 +81,10 @@ const updateTaskFromStage_DB = async (stageId, newData) => {
         }
         return taskIteration;
     })
+    
+    await stageUpdate.save();
 
-    return await stageUpdate.save()
+    return taskUpdate;
 }
 
 const addStage_DB = async (stage) => {

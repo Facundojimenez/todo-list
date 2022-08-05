@@ -8,6 +8,7 @@ import { useState } from "react";
 import { useEffect } from "react";
 import EditIcon from '@mui/icons-material/Edit';
 import { deleteStageFromDashboard } from "../utils/deleteData";
+import { updateStageFromDashboard } from "../utils/updateData";
 import { Dialog, DialogTitle, Button, DialogContent, DialogContentText, DialogActions, TextField, Grid} from '@mui/material';
 
 
@@ -22,6 +23,13 @@ const styles = {
 const Stage = ({title, stageId}) =>{
     const {currentDashboard, deleteStageRender} = useContext(UserContext);
     const [open, setOpen] = useState(false);
+
+    const [stageData, setStageData] = useState( () => {
+            const stageFind = currentDashboard.stages.find((stage) => stage._id === stageId);
+            return stageFind
+        }
+    )
+    let formData = stageData; 
 
     const [tasks, setTasks] = useState(() => {
         const stageFind = currentDashboard.stages.find((stage) => stage._id === stageId);
@@ -42,8 +50,15 @@ const Stage = ({title, stageId}) =>{
       };
 
       const handleInputChange = (event) =>{
-        // formData = ({...formData, [event.target.id]: event.target.value})
+        formData = ({...formData, [event.target.id]: event.target.value})
+        console.log(formData)
       };
+
+      const updateStage = async () =>{
+        setStageData(formData)
+        handleClose();
+        await updateStageFromDashboard(formData);
+      }
 
       const deleteStage = async () => {
         deleteStageRender(stageId)
@@ -57,7 +72,7 @@ const Stage = ({title, stageId}) =>{
             <Box>
                 <Box display="flex" justifyContent="space-between" style={{backgroundColor: "blue"}}> 
                     <Typography align="center" variant="h4">
-                        {title}
+                        {stageData.title}
                     </Typography>
                     <IconButton size="medium" onClick={handleClickOpen}>
                         <EditIcon />
@@ -101,7 +116,7 @@ const Stage = ({title, stageId}) =>{
                         <Grid item xs={8}>
                             <Box display="flex" justifyContent="flex-end">
                                 <Button onClick={handleClose}>Cancelar</Button>
-                                <Button onClick={handleClose}>Guardar</Button>
+                                <Button onClick={updateStage}>Guardar</Button>
                             </Box>
                         </Grid>
                     </Grid>

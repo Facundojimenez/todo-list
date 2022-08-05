@@ -34,8 +34,10 @@ export default function TaskAdder(props) {
   const createTask = async () =>{
     addTaskRender(taskData)
     handleClose();
-    await createTaskFromStage(taskData);
-    setTaskData({title: "", description: "", ...props})
+    const createdTask = await createTaskFromStage(taskData);
+    console.log("respuesta de addTask")
+    console.log(createdTask)
+    setTaskData(createdTask)
   }
 
 
