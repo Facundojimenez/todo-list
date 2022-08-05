@@ -6,6 +6,12 @@ const deleteTaskFromStage = async (stageId, taskId) => {
         return res;
 }
 
+const deleteStageFromDashboard = async (dashboardId, stageId) => {
+        const res = await Axios.delete(config.BACKEND_BASE_API_URL + `/stages/${stageId}`);
+        return res;
+}
+
 export {
-    deleteTaskFromStage
+    deleteTaskFromStage,
+    deleteStageFromDashboard
 };

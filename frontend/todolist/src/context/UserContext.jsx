@@ -109,8 +109,23 @@ export const UserProvider = ({ children }) => {
 		console.log(newDashboard)
 	}
 
+	const deleteStageRender = (stageDelete) =>{
+		console.log("se borro el render del stage " + stageDelete )
+
+		const updatedStages = currentDashboard.stages.filter((stage) => stage._id !== stageDelete)
+		
+		const newDashboard = {
+			...currentDashboard,
+			stages: [
+				...updatedStages
+			]
+		}
+
+		setCurrentDashboard(newDashboard)
+	}
+
     return (
-    <UserContext.Provider value={{ currentDashboard, addTaskRender, addStageRender, deleteTaskRender}}>
+    <UserContext.Provider value={{ currentDashboard, addTaskRender, addStageRender, deleteTaskRender, deleteStageRender}}>
         {children}
     </UserContext.Provider>
     );
