@@ -7,6 +7,7 @@ import { useState, useEffect } from "react";
 import {fetchStages} from "../utils/fetchData"
 import { useContext } from "react";
 import UserContext from "../context/UserContext";
+import StageAdder from "../components/StageAdder";
 
 const styles = {
     stagesContainer: {
@@ -15,29 +16,15 @@ const styles = {
 }
 
 const DashboardPage = () => {
-    ///ESTE NO ES EL DEL CONTEXTO, POR AHI lo saco
-    // const [stagess, setStages] = useState([]);
-
-    
     const {currentDashboard} = useContext(UserContext)
-    // console.log(currentDashboard)
-
-    // useEffect(() => {
-    //     const getStages = async () => {
-    //         const stagesData = await fetchStages();
-    //         setStages(stagesData)
-    //     }
-    //     getStages();
-    // }, []);
-
     return(
         <>
             <NavBar/>
             <Container sx={styles.stagesContainer}>
-            <Typography variant="h3" align="center">
-                hola
-            </Typography>
-            <Stack direction="row" justifyContent="space-around" alignItems="stretch" spacing={2}> 
+                <Typography variant="h3" align="center">
+                    hola
+                </Typography>
+                <Stack direction="row" justifyContent="flex-start" alignItems="stretch" spacing={2}> 
                     {
                         !currentDashboard.stages ? "loading" : currentDashboard.stages.map(stage => {
                             return (
@@ -45,7 +32,8 @@ const DashboardPage = () => {
                             )
                         })
                     }
-            </Stack>
+                    <StageAdder dashboardId={currentDashboard._id}/>
+                </Stack>
             </Container>
         </>
     )

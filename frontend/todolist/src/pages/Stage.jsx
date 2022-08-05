@@ -10,8 +10,7 @@ import { useEffect } from "react";
 const styles = {
     stageContainer: {
         backgroundColor: "#00ff00",
-        minWidth: "200px",
-        maxWidth: "300px",
+        width: "200px",
         padding: "1em"
     }
 }

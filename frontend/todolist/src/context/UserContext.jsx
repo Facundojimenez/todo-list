@@ -42,6 +42,22 @@ export const UserProvider = ({ children }) => {
 		getStages();	
 	}, [])
 	
+	const addStageRender = (newStage) =>{
+
+		console.log("se agregó el stage " + newStage.title + ": " + newStage.description )
+		
+		const newDashboard = {
+			...currentDashboard,
+			stages: [
+				...currentDashboard.stages,
+				newStage
+			]
+		}
+
+		setCurrentDashboard(newDashboard)
+		console.log(newDashboard)
+	}
+
 	const addTaskRender = (newTask) =>{
 		console.log("se agregó el render " + newTask.title + ": " + newTask.description )
 		const stageFind = currentDashboard.stages.find((stage) => stage._id === newTask.stageId);
@@ -94,7 +110,7 @@ export const UserProvider = ({ children }) => {
 	}
 
     return (
-    <UserContext.Provider value={{ currentDashboard, addTaskRender, deleteTaskRender}}>
+    <UserContext.Provider value={{ currentDashboard, addTaskRender, addStageRender, deleteTaskRender}}>
         {children}
     </UserContext.Provider>
     );
