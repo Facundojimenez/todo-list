@@ -7,15 +7,19 @@ import { useState } from 'react';
 import { Dialog, DialogTitle, DialogContent, DialogContentText, DialogActions, TextField, Box,Grid } from '@mui/material';
 import {actualizarCamposForm} from  "../utils/formFunctions"
 
-import { updateTaskFromStage } from "../utils/updateData";
+import { createTaskFromStage } from "../utils/createData";
 import { deleteTaskFromStage } from '../utils/deleteData';
 import { useContext } from 'react';
 import UserContext from "../context/UserContext"
+import AddIcon from '@mui/icons-material/Add';
 
-export default function Task(props) {
+
+export default function TaskAdder(props) {
   const {deleteTaskRender} = useContext(UserContext)
   const [open, setOpen] = useState(false);
   const [taskData, setTaskData] = useState({
+      title: "",
+      description: "",
       ...props
   })
 
@@ -32,27 +36,24 @@ export default function Task(props) {
     console.log(taskData)
   };
 
-  const updateTask = async () =>{
-    await updateTaskFromStage(taskData);
+  const createTask = async () =>{
+    console.log(taskData)
+    await createTaskFromStage(taskData);
     handleClose();
   }
 
-  const deleteTask = async () =>{
-    // console.log(taskData)
-    // await deleteTaskFromStage(taskData.stageId, taskData.taskId);
-    deleteTaskRender(taskData)
-    handleClose();
-  }
 
   
   return (
     <>
       {/* tarea */}
-      <Button onClick={handleClose}>Cancelar</Button>
+      <Box  style={{backgroundColor: "black", padding: "1em 0"}} display="flex" justifyContent="center">
+        <Button onClick={handleClickOpen} variant="contained" endIcon={<AddIcon />}>Agregar tarea</Button>
+      </Box>
 
       {/* Menu que se abre */}
       <Dialog open={open} onClose={handleClose} fullWidth={true} maxWidth="sm">
-        <DialogTitle>Editar tarea</DialogTitle>
+        <DialogTitle>Crear tarea</DialogTitle>
           <DialogContent>
             <DialogContentText>
                 Titulo de la tarea:
@@ -82,17 +83,8 @@ export default function Task(props) {
           />
         </DialogContent>
         <DialogActions>
-          <Grid container>
-            <Grid item xs={4} justifyContent="space-between">
-              <Button variant="outlined" color="error" onClick={deleteTask}>Eliminar</Button>
-            </Grid>
-            <Grid item xs={8}>
-            <Box display="flex" justifyContent="flex-end">
-              <Button onClick={handleClose}>Cancelar</Button>
-              <Button onClick={updateTask}>Guardar</Button>
-            </Box>
-            </Grid>
-          </Grid>
+          <Button onClick={handleClose}>Cancelar</Button>
+          <Button onClick={createTask}>Guardar</Button>
         </DialogActions>
       </Dialog>
 

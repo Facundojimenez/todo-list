@@ -39,7 +39,7 @@ export default function Task(props) {
 
   const deleteTask = async () =>{
     // console.log(taskData)
-    // await deleteTaskFromStage(taskData.stageId, taskData.taskId);
+    await deleteTaskFromStage(taskData.stageId, taskData.taskId);
     deleteTaskRender(taskData)
     handleClose();
   }
@@ -61,7 +61,7 @@ export default function Task(props) {
           </Typography>
         </CardContent>
         <CardActions>
-          <Button size="small" onClick={handleClickOpen}>Learn More</Button>
+          <Button size="small" onClick={handleClickOpen}>Editar</Button>
         </CardActions>
       </Card>
 

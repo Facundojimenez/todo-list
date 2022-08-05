@@ -3,6 +3,7 @@ import { useContext } from "react";
 // import { useEffect, useState } from "react";
 import Task from "../components/Task";
 import UserContext from "../context/UserContext";
+import TaskAdder from "../components/TaskAdder";
 
 const styles = {
     stageContainer: {
@@ -21,6 +22,7 @@ const Stage = ({title, tasks, stageId}) =>{
                     {title}
                 </Typography>
             </Box>
+            <TaskAdder stageId={stageId}/>
             <Stack sx={styles.stageContainer} spacing={2}>
                 {
                     tasks.map(task => {
