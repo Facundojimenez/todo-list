@@ -29,8 +29,8 @@ export const UserProvider = ({ children }) => {
 
 	useEffect(() => {
 		const getStages = async () => {
-			const currentStages = await fetchStages(); ///DEBERIA BUSCAR SOLO LAS STAGES DEL DASHBOARD ACTUAL
-			
+			let currentStages = await fetchStages(); ///DEBERIA BUSCAR SOLO LAS STAGES DEL DASHBOARD ACTUAL
+
 			const dashboardUpdate = {
 				...currentDashboard,
 				stages: [
@@ -47,7 +47,6 @@ export const UserProvider = ({ children }) => {
 		const stageFind = currentDashboard.stages.find((stage) => stage._id === newTask.stageId);
 		stageFind.tasks.push(newTask)	
 		
-		console.log(stageFind)
 
 		const newStages = currentDashboard.stages.map((stage) => {
 			if(stage._id === stageFind._id){

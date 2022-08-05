@@ -5,7 +5,6 @@ import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import { useState } from 'react';
 import { Dialog, DialogTitle, DialogContent, DialogContentText, DialogActions, TextField, Box,Grid } from '@mui/material';
-import {actualizarCamposForm} from  "../utils/formFunctions"
 
 import { updateTaskFromStage } from "../utils/updateData";
 import { deleteTaskFromStage } from '../utils/deleteData';
@@ -18,6 +17,7 @@ export default function Task(props) {
   const [taskData, setTaskData] = useState({
       ...props
   })
+  let formData = taskData; 
 
   const handleClickOpen = () => {
     setOpen(true);
@@ -27,18 +27,18 @@ export default function Task(props) {
     setOpen(false);
   };
 
+
   const handleInputChange = (event) =>{
-    actualizarCamposForm(event, taskData, setTaskData);
-    console.log(taskData)
+    formData = ({...formData, [event.target.id]: event.target.value})
   };
 
   const updateTask = async () =>{
+    setTaskData(formData)
     handleClose();
     await updateTaskFromStage(taskData);
   }
 
   const deleteTask = async () =>{
-    // console.log(taskData)
     deleteTaskRender(taskData)
     handleClose();
     await deleteTaskFromStage(taskData.stageId, taskData.taskId);
