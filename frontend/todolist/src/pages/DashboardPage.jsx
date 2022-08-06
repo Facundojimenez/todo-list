@@ -17,12 +17,13 @@ const styles = {
 const DashboardPage = () => {
     const {user, currentDashboard} = useContext(UserContext)
     console.log(user)
+    console.log(currentDashboard)
     return(
         <>
             <NavBar/>
             <Container sx={styles.stagesContainer} maxWidth="false">
                 <Typography variant="h2" align="center">
-                    Mi tablero de tareas
+                    {currentDashboard.title}
                 </Typography>
                 <Stack direction="row" justifyContent="flex-start" alignItems="stretch" spacing={2}> 
                     {

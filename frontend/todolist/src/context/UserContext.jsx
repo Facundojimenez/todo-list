@@ -27,7 +27,7 @@ const userr = {
 
 export const UserProvider = ({ children }) => {
 	const [user, setUser] = useLocalStorage("user", {})
-	const [currentDashboard, setCurrentDashboard] = useState({})
+	const [currentDashboard, setCurrentDashboard] = useState(user.dashboards ? user.dashboards[0] : {})
 
 	useEffect(() => {
 		const getStages = async () => {
