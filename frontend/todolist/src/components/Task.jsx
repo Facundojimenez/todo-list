@@ -33,16 +33,10 @@ export default function Task(props) {
   };
 
   const updateTask = async () =>{
-    console.log("taskDAta antes: ")
-    console.log(taskData)
-
-
     const updatedTask = await updateTaskFromStage(formData);
     updatedTask.taskId = updatedTask._id 
     updatedTask.stageId = taskData.stageId 
 
-    console.log("taskDAta despues: ")
-    console.log(updatedTask)
     setTaskData(updatedTask)
     handleClose();
   }

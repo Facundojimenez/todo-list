@@ -39,6 +39,9 @@ const Stage = ({title, stageId}) =>{
     useEffect(() => {
         const stageFind = currentDashboard.stages.find((stage) => stage._id === stageId);
         setTasks(stageFind.tasks)
+        // console.log("se activo useEffect de stage")
+        // console.log(stageFind.tasks)
+        
     }, [currentDashboard])
 
     const handleClickOpen = () => {
@@ -51,7 +54,6 @@ const Stage = ({title, stageId}) =>{
 
       const handleInputChange = (event) =>{
         formData = ({...formData, [event.target.id]: event.target.value})
-        console.log(formData)
       };
 
       const updateStage = async () =>{
@@ -101,7 +103,7 @@ const Stage = ({title, stageId}) =>{
                     autoFocus
                     margin="dense"
                     id="title"
-                    defaultValue={title}
+                    defaultValue={stageData.title}
                     type="text"
                     fullWidth
                     variant="standard"
