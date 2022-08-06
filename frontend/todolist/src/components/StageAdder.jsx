@@ -1,17 +1,9 @@
 import { useState, useContext } from 'react';
-import { Dialog, DialogTitle, Button, DialogContent, DialogContentText, DialogActions, TextField, Box,Grid } from '@mui/material';
+import { Dialog, DialogTitle, Button, DialogContent, Card,Typography,DialogContentText, DialogActions, TextField, Box,Grid } from '@mui/material';
 import AddIcon from '@mui/icons-material/Add';
 import {actualizarCamposForm} from  "../utils/formFunctions"
 import { createStageFromDashboard } from "../utils/createData";
 import UserContext from "../context/UserContext"
-
-const styles = {
-  stageContainer: {
-    backgroundColor: "rgba(0,0,0,0.3)",
-    width: "200px",
-    padding: "1em"
-  }
-}
 
 export default function StageAdder(props) {
   const {addStageRender} = useContext(UserContext)
@@ -48,17 +40,16 @@ export default function StageAdder(props) {
   return (
     <>
       {/* tarea */}
-      <Box  sx={styles.stageContainer} display="flex" justifyContent="center" alignItems="flex-start">
-        <Button onClick={handleClickOpen} variant="contained" endIcon={<AddIcon />}>Agregar Stage</Button>
-      </Box>
 
-      {/* <Box>
-            <Box style={{backgroundColor: "blue"}}> 
-                <Typography align="center" variant="h4">
-                    sdsd
-                </Typography>
-            </Box>
-        </Box> */}
+      <Card sx={{ padding: "0.5em", minWidth: "345px", bgcolor: "rgba(235,235,235, 0.8)" }}>
+          <Button sx={{padding: "1em"}} fullWidth variant="contained" color="primary" onClick={handleClickOpen} startIcon={<AddIcon/>}>
+            <Typography>
+              Agregar Stage
+            </Typography>
+          </Button>
+      </Card>
+
+
 
       {/* Menu que se abre */}
       <Dialog open={open} onClose={handleClose} fullWidth={true} maxWidth="sm">

@@ -64,8 +64,8 @@ const Stage = ({title, stageId}) =>{
 
     return(
         <>  
-
             <Card sx={{ minWidth: "345px", bgcolor: "#ebebeb" }}>
+                {/* Encabezado del stage */}
                 <CardHeader
                     action={
                         <>
@@ -77,6 +77,7 @@ const Stage = ({title, stageId}) =>{
                     }
                     title={stageData.title}
                 />
+                {/* Lista de tasks */}
                 <CardContent>
                     <Stack sx={styles.stageContainer} spacing={2}>
                         {
@@ -89,29 +90,6 @@ const Stage = ({title, stageId}) =>{
                     </Stack>
                 </CardContent>
             </Card>
-
-
-            {/* Stage */}
-            {/* <Box>
-                <Box display="flex" justifyContent="space-between" style={{backgroundColor: "blue"}}> 
-                    <Typography align="center" variant="h4">
-                        {stageData.title}
-                    </Typography>
-                    <IconButton size="medium" onClick={handleClickOpen}>
-                        <EditIcon />
-                    </IconButton>
-                </Box>
-                <TaskAdder stageId={stageId}/>
-                <Stack sx={styles.stageContainer} spacing={2}>
-                    {
-                        tasks.map(task => {
-                            return(
-                                <Task title={task.title} description={task.description} order={task.order} stageId={stageId} taskId={task._id} key={task._id}/>
-                            )
-                        })
-                    }
-                </Stack>
-            </Box> */}
 
             {/* Menu que se abre */}
             <Dialog open={open} onClose={handleClose} fullWidth={true} maxWidth="sm">
