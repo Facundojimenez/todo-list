@@ -1,15 +1,9 @@
-import Card from '@mui/material/Card';
-import CardActions from '@mui/material/CardActions';
-import CardContent from '@mui/material/CardContent';
-import Button from '@mui/material/Button';
-import Typography from '@mui/material/Typography';
-import { useState } from 'react';
-import { Dialog, DialogTitle, DialogContent, DialogContentText, DialogActions, TextField, Box,Grid } from '@mui/material';
-
+import { Dialog, DialogTitle, DialogContent, DialogContentText, DialogActions, TextField, Box,Grid, Card, CardActions, CardContent, Button, Typography } from '@mui/material';
+import { useState, useContext } from 'react';
 import { updateTaskFromStage } from "../utils/updateData";
 import { deleteTaskFromStage } from '../utils/deleteData';
-import { useContext } from 'react';
 import UserContext from "../context/UserContext"
+
 
 export default function Task(props) {
   const {deleteTaskRender} = useContext(UserContext)

@@ -1,22 +1,16 @@
-import { Stack, Box, Typography, IconButton } from "@mui/material";
-import { useContext } from "react";
-// import { useEffect, useState } from "react";
+import { Stack, Box, IconButton, CardContent, CardHeader, Card, Dialog, DialogTitle, Button, DialogContent, DialogContentText, DialogActions, TextField, Grid } from "@mui/material";
+import { MoreVert} from '@mui/icons-material';
+import { useState, useEffect, useContext } from "react";
 import Task from "../components/Task";
 import UserContext from "../context/UserContext";
 import TaskAdder from "../components/TaskAdder";
-import { useState } from "react";
-import { useEffect } from "react";
-import EditIcon from '@mui/icons-material/Edit';
 import { deleteStageFromDashboard } from "../utils/deleteData";
 import { updateStageFromDashboard } from "../utils/updateData";
-import { Dialog, DialogTitle, Button, DialogContent, DialogContentText, DialogActions, TextField, Grid} from '@mui/material';
-
 
 const styles = {
     stageContainer: {
-        backgroundColor: "#00ff00",
-        width: "200px",
-        padding: "1em"
+        // backgroundColor: "#00ff00",
+        // padding: "2px"
     }
 }
 
@@ -69,9 +63,36 @@ const Stage = ({title, stageId}) =>{
       }
 
     return(
-        <>
+        <>  
+
+            <Card sx={{ minWidth: "345px", bgcolor: "#ebebeb" }}>
+                <CardHeader
+                    action={
+                        <>
+                            <TaskAdder stageId={stageId}/>
+                            <IconButton aria-label="settings" onClick={handleClickOpen}>
+                                <MoreVert />
+                            </IconButton>
+                        </>
+                    }
+                    title={stageData.title}
+                />
+                <CardContent>
+                    <Stack sx={styles.stageContainer} spacing={2}>
+                        {
+                            tasks.map(task => {
+                                return(
+                                    <Task title={task.title} description={task.description} order={task.order} stageId={stageId} taskId={task._id} key={task._id}/>
+                                )
+                            })
+                        }
+                    </Stack>
+                </CardContent>
+            </Card>
+
+
             {/* Stage */}
-            <Box>
+            {/* <Box>
                 <Box display="flex" justifyContent="space-between" style={{backgroundColor: "blue"}}> 
                     <Typography align="center" variant="h4">
                         {stageData.title}
@@ -90,11 +111,11 @@ const Stage = ({title, stageId}) =>{
                         })
                     }
                 </Stack>
-            </Box>
+            </Box> */}
 
             {/* Menu que se abre */}
             <Dialog open={open} onClose={handleClose} fullWidth={true} maxWidth="sm">
-                <DialogTitle>Editare Stage</DialogTitle>
+                <DialogTitle>Editar Stage</DialogTitle>
                 <DialogContent>
                     <DialogContentText>
                         Titulo del stage:

@@ -1,12 +1,9 @@
-import Button from '@mui/material/Button';
-import { useState } from 'react';
-import { Dialog, DialogTitle,Typography, DialogContent, DialogContentText, DialogActions, TextField, Box,Grid } from '@mui/material';
-import {actualizarCamposForm} from  "../utils/formFunctions"
-
-import { createStageFromDashboard } from "../utils/createData";
-import { useContext } from 'react';
-import UserContext from "../context/UserContext"
+import { useState, useContext } from 'react';
+import { Dialog, DialogTitle, Button, DialogContent, DialogContentText, DialogActions, TextField, Box,Grid } from '@mui/material';
 import AddIcon from '@mui/icons-material/Add';
+import {actualizarCamposForm} from  "../utils/formFunctions"
+import { createStageFromDashboard } from "../utils/createData";
+import UserContext from "../context/UserContext"
 
 const styles = {
   stageContainer: {

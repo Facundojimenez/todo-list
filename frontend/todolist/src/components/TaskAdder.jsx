@@ -1,12 +1,9 @@
-import Button from '@mui/material/Button';
-import { useState } from 'react';
-import { Dialog, DialogTitle, DialogContent, DialogContentText, DialogActions, TextField, Box,Grid } from '@mui/material';
-import {actualizarCamposForm} from  "../utils/formFunctions"
-
-import { createTaskFromStage } from "../utils/createData";
-import { useContext } from 'react';
-import UserContext from "../context/UserContext"
+import { Dialog, DialogTitle, DialogContent,IconButton, DialogContentText, DialogActions, TextField, Button } from '@mui/material';
+import { useState, useContext } from 'react';
 import AddIcon from '@mui/icons-material/Add';
+import {actualizarCamposForm} from  "../utils/formFunctions"
+import { createTaskFromStage } from "../utils/createData";
+import UserContext from "../context/UserContext"
 
 
 export default function TaskAdder(props) {
@@ -46,10 +43,10 @@ export default function TaskAdder(props) {
   
   return (
     <>
-      {/* tarea */}
-      <Box  style={{backgroundColor: "black", padding: "1em 0"}} display="flex" justifyContent="center">
-        <Button onClick={handleClickOpen} variant="contained" endIcon={<AddIcon />}>Agregar tarea</Button>
-      </Box>
+      {/* boton de agregartarea */}
+      <IconButton  onClick={handleClickOpen}>
+          <AddIcon />
+      </IconButton>
 
       {/* Menu que se abre */}
       <Dialog open={open} onClose={handleClose} fullWidth={true} maxWidth="sm">
