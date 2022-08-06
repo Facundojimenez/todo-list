@@ -1,10 +1,11 @@
 import { useEffect } from "react";
 import { createContext, useState } from "react";
 import {fetchStages} from "../utils/fetchData"
+import useLocalStorage from "../utils/useLocalStorage";
 
 const UserContext = createContext([]);
 
-const user = {
+const userr = {
 	_id: 1,
 	username: "facu",
 	email: "facu@gmail.com",
@@ -25,7 +26,8 @@ const user = {
 }
 
 export const UserProvider = ({ children }) => {
-	const [currentDashboard, setCurrentDashboard] = useState(user.dashboards[0])
+	const [user, setUser] = useLocalStorage("user", {})
+	const [currentDashboard, setCurrentDashboard] = useState({})
 
 	useEffect(() => {
 		const getStages = async () => {
@@ -125,7 +127,7 @@ export const UserProvider = ({ children }) => {
 	}
 
     return (
-    <UserContext.Provider value={{ currentDashboard, addTaskRender, addStageRender, deleteTaskRender, deleteStageRender}}>
+    <UserContext.Provider value={{ currentDashboard, addTaskRender, addStageRender, deleteTaskRender, deleteStageRender, user, setUser}}>
         {children}
     </UserContext.Provider>
     );

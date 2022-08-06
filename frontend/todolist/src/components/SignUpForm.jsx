@@ -2,10 +2,12 @@ import {Paper, Box, Stack, Typography, Grid, TextField, Button} from "@mui/mater
 import { makeStyles } from '@mui/styles';
 import CustomTheme from "../context/CustomTheme";
 import BrandLogo from "./BrandLogo";
-import Axios from "axios";
-import config from "../utils/config";
 import { useState } from "react";
 import {actualizarCamposForm} from "../utils/formFunctions";
+import { useNavigate } from "react-router-dom";
+import { signupUser } from "../utils/userSignup";
+import UserContext from "../context/UserContext";
+import { useContext } from "react";
 
 const useStyles = makeStyles({
     formContainer:{
@@ -34,18 +36,19 @@ const useStyles = makeStyles({
 
 
 const SignUpForm = () =>{
+    const {setUser} = useContext(UserContext);
     const classes = useStyles();
-
+    const navigate = useNavigate();
     const [userData, setUserData] = useState({
         username: "",
         email: "",
         password: ""
     });
 
-    const handleSubmit = async (event) =>{
-        const response = await Axios.post(config.BACKEND_BASE_API_URL + "/users/signup", userData);
-
-        console.log(response);
+    const handleSubmit = async () =>{
+        const response = await signupUser(userData)
+        setUser(response.data.user)
+        navigate("/dashboard")
     }
 
     const handleInputChange = (event) =>{

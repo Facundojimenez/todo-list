@@ -85,7 +85,7 @@ const auth = (req, res, next) =>{
 router.get("/" , getAllUsers);
 router.get("/search", searchUserByUsername);
 router.get("/:id", getUserById);
-router.post("/", addUser);
+// router.post("/", addUser); // la reemplazo por la de passport
 
 router.post("/addDashboard/:id", addDashboardToUser);
 router.put("/updateDashboard/:id", updateDashboardFromUser);

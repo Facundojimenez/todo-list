@@ -2,10 +2,12 @@ import {Paper, Box, Typography, Grid, TextField, Button, Stack} from "@mui/mater
 import { makeStyles } from '@mui/styles';
 import CustomTheme from "../context/CustomTheme";
 import BrandLogo from "./BrandLogo";
-import Axios from "axios";
-import config from "../utils/config";
 import { useState } from "react";
 import {actualizarCamposForm} from "../utils/formFunctions";
+import { loginUser } from "../utils/userLogin";
+import { useNavigate } from "react-router-dom";
+import UserContext from "../context/UserContext";
+import { useContext } from "react";
 
 const useStyles = makeStyles({
     formContainer:{
@@ -33,22 +35,19 @@ const useStyles = makeStyles({
 })
 
 const LoginForm = () =>{
-    const classes = useStyles();
+    const {setUser} = useContext(UserContext);
 
+    const classes = useStyles();
+    const navigate = useNavigate();
     const [userData, setUserData] = useState({
         username: "",
         password: ""
     });
 
-    const handleSubmit = async (event) =>{
-        const response = await Axios.post(config.BACKEND_BASE_API_URL + "/users/login", userData, {withCredentials: true});
-
-        if(response.status === 200){
-            //entro a la pagina
-        }
-
-
-        console.log(response);
+    const handleSubmit = async () =>{
+        const response = await loginUser(userData)
+        setUser(response.data.user)
+        navigate("/dashboard")
     }
 
     const handleInputChange = (event) =>{

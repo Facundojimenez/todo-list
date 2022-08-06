@@ -6,6 +6,7 @@ import { useContext } from "react";
 import UserContext from "../context/UserContext";
 import StageAdder from "../components/StageAdder";
 
+
 const styles = {
     stagesContainer: {
         backgroundColor: "#99c7f2",
@@ -14,7 +15,8 @@ const styles = {
 }
 
 const DashboardPage = () => {
-    const {currentDashboard} = useContext(UserContext)
+    const {user, currentDashboard} = useContext(UserContext)
+    console.log(user)
     return(
         <>
             <NavBar/>
