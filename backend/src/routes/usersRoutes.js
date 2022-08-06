@@ -108,14 +108,15 @@ router.post("/signup", passport.authenticate("local-signup", { failureRedirect: 
 });
 
 router.post('/logout', (req, res) => {
+    res.clearCookie("connect.sid", {path: '/'})
     req.logout((err) => {
-        if (err) {
-             return next(err);
-        }
         res.status(200).json({
             message: "Se ha cerrado la sesion correctamente"
         })
-    });
+    })
 });
+
+
+
 
 module.exports = router;

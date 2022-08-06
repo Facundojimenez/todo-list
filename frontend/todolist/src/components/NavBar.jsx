@@ -10,15 +10,15 @@ import { useContext } from 'react';
 import { Button } from '@mui/material';
 import { logoutUser } from '../utils/userLogout';
 import { useNavigate } from "react-router-dom";
+import DashboardSelector from './DashboardSelector';
+
 
 export default function NavBar() {
   const {user, setUser} = useContext(UserContext)
   const navigate = useNavigate();
 
   const handleSubmit = async () =>{
-    console.log("hitt")
-    const response = await logoutUser()
-    console.log(response)
+    await logoutUser()
     setUser({})
     navigate("/login")
 }
@@ -27,19 +27,11 @@ export default function NavBar() {
     <Box sx={{ flexGrow: 1 }}>
       <AppBar position="static">
         <Toolbar>
-          <IconButton
-            size="large"
-            edge="start"
-            color="inherit"
-            aria-label="menu"
-            sx={{ mr: 2 }}
-          >
+          <IconButton size="large" edge="start"  color="inherit" aria-label="menu" sx={{ mr: 2 }}>
             <MenuIcon />
           </IconButton>
-          <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-            Task Master
-          </Typography>
-          <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
+          <DashboardSelector/>
+          <Typography variant="h6" component="div" sx={{ flexGrow: 1 }} align="center">
             Hola, {user.username}
           </Typography>
           <Button color="inherit" onClick={handleSubmit}>Cerrar sesión</Button>

@@ -1,4 +1,4 @@
-import { Stack, Box, IconButton, CardContent, CardHeader, Card, Dialog, DialogTitle, Button, DialogContent, DialogContentText, DialogActions, TextField, Grid } from "@mui/material";
+import { Stack, Box, Divider, IconButton, CardContent, CardHeader, Card, Dialog, DialogTitle, Button, DialogContent, DialogContentText, DialogActions, TextField, Grid } from "@mui/material";
 import { MoreVert} from '@mui/icons-material';
 import { useState, useEffect, useContext } from "react";
 import Task from "../components/Task";
@@ -77,6 +77,7 @@ const Stage = ({title, stageId}) =>{
                     }
                     title={stageData.title}
                 />
+                <Divider sx={{ my: 0.5 }} />
                 {/* Lista de tasks */}
                 <CardContent>
                     <Stack sx={styles.stageContainer} spacing={2}>
