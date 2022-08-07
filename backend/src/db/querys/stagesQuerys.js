@@ -5,6 +5,14 @@ const getAllStages_DB = async () => {
     return await Stage.find({})
 }
 
+const getStagesFromDashboard_DB = async (dashboardId) => {
+    if(!dashboardId){
+        return {message: "Es necesario pasar el ID del dashboard como parametro"};
+    }
+    return await Stage.find({dashboardId: dashboardId})
+}
+
+
 const getStageById_DB = async (id) => {
     return await Stage.findById(id)
 }
@@ -96,6 +104,7 @@ const addStage_DB = async (stage) => {
 
 module.exports = {
     getAllStages_DB,
+    getStagesFromDashboard_DB,
     getStageById_DB,
     updateStageById_DB,
     updateTaskFromStage_DB,

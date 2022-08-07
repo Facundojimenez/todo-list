@@ -1,10 +1,12 @@
 const {Router} = require("express");
 const router = Router();
-const {getAllStages , getStageById, deleteStageById, updateStageById ,updateTaskFromStage,  deleteTaskFromStage , addTaskToStage, addStage} = require("../controllers/stagesControllers")
+const {getAllStages, getStagesFromDashboard , getStageById, deleteStageById, updateStageById ,updateTaskFromStage,  deleteTaskFromStage , addTaskToStage, addStage} = require("../controllers/stagesControllers")
 
 
 
-router.get("/" , getAllStages);
+// router.get("/" , getAllStages);
+router.get("/" , getStagesFromDashboard);
+
 router.post("/", addStage);
 router.get("/:id", getStageById);
 router.delete("/:id", deleteStageById);

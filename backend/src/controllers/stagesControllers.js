@@ -1,8 +1,15 @@
 
-const {getAllStagesService, getStageByIdService, addTaskToStageService, deleteTaskFromStageService, updateTaskFromStageService, updateStageByIdService, deleteStageByIdService, addStageService} = require("../services/stagesServices")
+const {getAllStagesService, getStageByIdService,getStagesFromDashboardService, addTaskToStageService, deleteTaskFromStageService, updateTaskFromStageService, updateStageByIdService, deleteStageByIdService, addStageService} = require("../services/stagesServices")
 
 const getAllStages = async (req, res) => {
     const stages = await getAllStagesService();
+    res.json(stages);
+}
+
+const getStagesFromDashboard = async (req, res) => {
+    const {dashboardId} = req.query;
+    console.log(dashboardId)
+    const stages = await getStagesFromDashboardService(dashboardId);
     res.json(stages);
 }
 
@@ -53,6 +60,7 @@ const addStage = async (req, res) => {
 
 module.exports = {
     getAllStages,
+    getStagesFromDashboard,
     getStageById,
     addTaskToStage,
     updateStageById,
