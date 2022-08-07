@@ -7,7 +7,7 @@ import {actualizarCamposForm} from "../utils/formFunctions";
 import { loginUser } from "../utils/userLogin";
 import { useNavigate } from "react-router-dom";
 import UserContext from "../context/UserContext";
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 
 const useStyles = makeStyles({
     formContainer:{
@@ -36,6 +36,8 @@ const useStyles = makeStyles({
 
 const LoginForm = () =>{
     const {setUser} = useContext(UserContext);
+
+
 
     const classes = useStyles();
     const navigate = useNavigate();

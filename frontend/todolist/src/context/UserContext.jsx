@@ -5,33 +5,18 @@ import useLocalStorage from "../utils/useLocalStorage";
 
 const UserContext = createContext([]);
 
-const userr = {
-	_id: 1,
-	username: "facu",
-	email: "facu@gmail.com",
-	dashboards: [
-		{
-			title: "nuevoi TITLE update2",
-			_id: 3
-		},
-		{
-			title: "nuevo dashboard API",
-			_id: 4
-		},
-		{
-			title: "nuevo dashboard API",
-			_id: 5
-		}        
-	]
-}
-
 export const UserProvider = ({ children }) => {
-	const [user, setUser] = useLocalStorage("user", {})
-	const [currentDashboard, setCurrentDashboard] = useState(user.dashboards ? user.dashboards[0] : {})
+	const [user, setUser] = useLocalStorage("user", null)
+	const [currentDashboard, setCurrentDashboard] = useState( () => {
+		if(!user || user.dashboards.length === 0){
+			return null;
+		}
+		return user.dashboards[0]
+	})
 
 	useEffect(() => {
 		const getStages = async () => {
-			let dashboardStages = await fetchStages(currentDashboard._id); ///DEBERIA BUSCAR SOLO LAS STAGES DEL DASHBOARD ACTUAL
+			let dashboardStages = await fetchStages(user.dashboards[0]._id); ///DEBERIA BUSCAR SOLO LAS STAGES DEL DASHBOARD ACTUAL
 
 			const dashboardUpdate = {
 				...currentDashboard,
@@ -41,12 +26,15 @@ export const UserProvider = ({ children }) => {
 			}
 			setCurrentDashboard(dashboardUpdate);
 		}
-		getStages();	
-	}, [])
+		// console.log(user.dashboards)
+		if(user && user.dashboards.length > 0){
+			getStages();
+		}
+		
+	}, [user])
 	
 	const changeDashboard = async (dashboardId) => {
 		const dashboardFind = user.dashboards.find(dashboard => dashboard._id === dashboardId)
-		// console.log(dashboardFind)
 
 		let dashboardStages = await fetchStages(dashboardFind._id); ///DEBERIA BUSCAR SOLO LAS STAGES DEL DASHBOARD ACTUAL
 
@@ -142,7 +130,7 @@ export const UserProvider = ({ children }) => {
 	}
 
     return (
-    <UserContext.Provider value={{ currentDashboard, addTaskRender,changeDashboard, addStageRender, deleteTaskRender, deleteStageRender, user, setUser}}>
+    <UserContext.Provider value={{ currentDashboard, setCurrentDashboard, addTaskRender,changeDashboard, addStageRender, deleteTaskRender, deleteStageRender, user, setUser}}>
         {children}
     </UserContext.Provider>
     );

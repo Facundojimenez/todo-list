@@ -14,13 +14,14 @@ import DashboardSelector from './DashboardSelector';
 
 
 export default function NavBar() {
-  const {user, setUser} = useContext(UserContext)
+  const {user, setUser, setCurrentDashboard} = useContext(UserContext)
   const navigate = useNavigate();
 
   const handleSubmit = async () =>{
     await logoutUser()
-    setUser({})
     navigate("/login")
+    setUser(null)
+    setCurrentDashboard(null);
 }
 
   return (

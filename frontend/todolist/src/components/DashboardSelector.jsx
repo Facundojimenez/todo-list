@@ -50,7 +50,7 @@ const StyledMenu = styled((props) => (
 }));
 
 export default function CustomizedMenus() {
-	const {changeDashboard , user} = useContext(UserContext)
+	const {changeDashboard, currentDashboard ,user} = useContext(UserContext)
 
   const [anchorEl, setAnchorEl] = useState(null);
   const open = Boolean(anchorEl);
@@ -69,27 +69,29 @@ export default function CustomizedMenus() {
     setAnchorEl(null);
   };
 
-  return (
-    <div>
-      <Button aria-controls={open ? 'demo-customized-menu' : undefined} variant="contained" disableElevation onClick={handleClick} endIcon={<KeyboardArrowDownIcon />}>
-        Elegir dashboard
-      </Button>
-			<StyledMenu anchorEl={anchorEl} open={open} onClose={handleClose}>
-				{
-					user.dashboards.map(dashboard => {
-						return (
-							<MenuItem onClick={handleChangeDashboard} dashboardid={dashboard._id} key={dashboard._id}>
-								<GridViewIcon/>
-								{dashboard.title}
-							</MenuItem>
-						)
-					})
-				}
-				<MenuItem onClick={handleClose}>
-					<DashboardCustomizeIcon/> 
-						Nuevo Dashboard
-				</MenuItem>
-			</StyledMenu>
-    </div>
-  );
+  if(currentDashboard){
+    return (
+      <div>
+        <Button aria-controls={open ? 'demo-customized-menu' : undefined} variant="contained" disableElevation onClick={handleClick} endIcon={<KeyboardArrowDownIcon />}>
+          Elegir dashboard
+        </Button>
+        <StyledMenu anchorEl={anchorEl} open={open} onClose={handleClose}>
+          {
+            user.dashboards.map(dashboard => {
+              return (
+                <MenuItem style={currentDashboard._id === dashboard._id ? {backgroundColor:"#dcdcdc"} : {}} onClick={handleChangeDashboard} dashboardid={dashboard._id} key={dashboard._id}>
+                  <GridViewIcon/>
+                  {dashboard.title}
+                </MenuItem>
+              )
+            })
+          }
+          <MenuItem onClick={handleClose}>
+            <DashboardCustomizeIcon/> 
+              Nuevo Dashboard
+          </MenuItem>
+        </StyledMenu>
+      </div>
+    );
+  }
 }
