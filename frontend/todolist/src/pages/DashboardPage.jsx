@@ -29,7 +29,7 @@ const DashboardPage = () => {
                     {
                         !currentDashboard.stages ? "loading" : currentDashboard.stages.map(stage => {
                             return (
-                                <Stage title={stage.title} tasks={stage.tasks} stageId={stage._id} key={stage._id} /> 
+                                <Stage title={stage.title} tasks={stage.tasks} dashboardId={stage.dashboardId} stageId={stage._id} key={stage._id} /> 
                             )
                         })
                     }

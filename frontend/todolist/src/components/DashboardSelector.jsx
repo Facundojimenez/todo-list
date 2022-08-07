@@ -50,13 +50,21 @@ const StyledMenu = styled((props) => (
 }));
 
 export default function CustomizedMenus() {
-	const {user} = useContext(UserContext)
+	const {changeDashboard , user} = useContext(UserContext)
 
   const [anchorEl, setAnchorEl] = useState(null);
   const open = Boolean(anchorEl);
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
   };
+
+  const handleChangeDashboard = (event) => {
+    const dashboardId = parseInt(event.target.getAttribute("dashboardid"))
+    console.log(dashboardId)
+    changeDashboard(dashboardId)
+    handleClose();
+  }
+
   const handleClose = () => {
     setAnchorEl(null);
   };
@@ -70,7 +78,7 @@ export default function CustomizedMenus() {
 				{
 					user.dashboards.map(dashboard => {
 						return (
-							<MenuItem onClick={handleClose} key={dashboard._id}>
+							<MenuItem onClick={handleChangeDashboard} dashboardid={dashboard._id} key={dashboard._id}>
 								<GridViewIcon/>
 								{dashboard.title}
 							</MenuItem>

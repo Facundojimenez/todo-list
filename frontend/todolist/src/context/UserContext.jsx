@@ -31,12 +31,12 @@ export const UserProvider = ({ children }) => {
 
 	useEffect(() => {
 		const getStages = async () => {
-			let currentStages = await fetchStages(); ///DEBERIA BUSCAR SOLO LAS STAGES DEL DASHBOARD ACTUAL
+			let dashboardStages = await fetchStages(currentDashboard._id); ///DEBERIA BUSCAR SOLO LAS STAGES DEL DASHBOARD ACTUAL
 
 			const dashboardUpdate = {
 				...currentDashboard,
 				stages: [
-					...currentStages
+					...dashboardStages
 				]
 			}
 			setCurrentDashboard(dashboardUpdate);
@@ -44,6 +44,21 @@ export const UserProvider = ({ children }) => {
 		getStages();	
 	}, [])
 	
+	const changeDashboard = async (dashboardId) => {
+		const dashboardFind = user.dashboards.find(dashboard => dashboard._id === dashboardId)
+		// console.log(dashboardFind)
+
+		let dashboardStages = await fetchStages(dashboardFind._id); ///DEBERIA BUSCAR SOLO LAS STAGES DEL DASHBOARD ACTUAL
+
+			const dashboardUpdate = {
+				...dashboardFind,
+				stages: [
+					...dashboardStages
+				]
+			}
+			setCurrentDashboard(dashboardUpdate);
+	}
+
 	const addStageRender = (newStage) =>{
 
 		console.log("se agregó el stage " + newStage.title + ": " + newStage.description )
@@ -127,7 +142,7 @@ export const UserProvider = ({ children }) => {
 	}
 
     return (
-    <UserContext.Provider value={{ currentDashboard, addTaskRender, addStageRender, deleteTaskRender, deleteStageRender, user, setUser}}>
+    <UserContext.Provider value={{ currentDashboard, addTaskRender,changeDashboard, addStageRender, deleteTaskRender, deleteStageRender, user, setUser}}>
         {children}
     </UserContext.Provider>
     );
