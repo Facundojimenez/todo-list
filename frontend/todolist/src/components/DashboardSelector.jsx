@@ -1,5 +1,5 @@
 import { styled, alpha } from '@mui/material/styles';
-import Button from '@mui/material/Button';
+import {Button, Dialog, DialogActions, DialogTitle, DialogContent, DialogContentText, TextField} from '@mui/material';
 import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
@@ -7,6 +7,8 @@ import {useState, useContext } from "react"
 import UserContext from '../context/UserContext';
 import DashboardCustomizeIcon from '@mui/icons-material/DashboardCustomize';
 import GridViewIcon from '@mui/icons-material/GridView';
+import {createDashboardFromUser} from "../utils/createData"
+import { actualizarCamposForm } from '../utils/formFunctions';
 
 const StyledMenu = styled((props) => (
   <Menu
@@ -50,9 +52,15 @@ const StyledMenu = styled((props) => (
 }));
 
 export default function CustomizedMenus() {
-	const {changeDashboard, currentDashboard ,user} = useContext(UserContext)
+	const {changeDashboard, currentDashboard ,user, setUser} = useContext(UserContext)
 
   const [anchorEl, setAnchorEl] = useState(null);
+  const [openForm, setOpenForm] = useState(false);
+  const [formData, setFormData] = useState({
+    title: "",
+    userId: user._id
+  })
+
   const open = Boolean(anchorEl);
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
@@ -62,6 +70,25 @@ export default function CustomizedMenus() {
     const dashboardId = parseInt(event.target.getAttribute("dashboardid"))
     console.log(dashboardId)
     changeDashboard(dashboardId)
+    handleClose();
+  }
+
+  const handleInputChange = (event) =>{
+    actualizarCamposForm(event, formData, setFormData);
+  };
+
+  const handleClickOpenForm = () => {
+    setOpenForm(true);
+  };
+
+  const handleCloseForm = () => {
+    setOpenForm(false);
+  };
+
+  const handleAddDashboard = async () => {
+    console.log(formData)
+    const updatedUser =  await createDashboardFromUser(formData);
+    setUser(updatedUser)
     handleClose();
   }
 
@@ -86,11 +113,36 @@ export default function CustomizedMenus() {
               )
             })
           }
-          <MenuItem onClick={handleClose}>
+          <MenuItem onClick={handleClickOpenForm}>
             <DashboardCustomizeIcon/> 
               Nuevo Dashboard
           </MenuItem>
         </StyledMenu>
+
+        {/* Menu que se abre */}
+        <Dialog open={openForm} onClose={handleCloseForm} fullWidth={true} maxWidth="sm">
+          <DialogTitle>Crear Dashboard</DialogTitle>
+            <DialogContent>
+              <DialogContentText>
+                  Titulo:
+              </DialogContentText>
+              <TextField
+                autoFocus
+                margin="dense"
+                id="title"
+                defaultValue=""
+                type="text"
+                fullWidth
+                variant="standard"
+                onChange={handleInputChange}
+              />
+          </DialogContent>
+          <DialogActions>
+            <Button onClick={handleCloseForm}>Cancelar</Button>
+            <Button onClick={handleAddDashboard}>Guardar</Button>
+          </DialogActions>
+        </Dialog>
+
       </div>
     );
   }

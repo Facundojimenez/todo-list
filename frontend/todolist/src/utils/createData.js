@@ -11,7 +11,13 @@ const createStageFromDashboard = async (stageData) => {
     return res.data;
 }
 
+const createDashboardFromUser = async (dashboardData) => {
+    const res = await Axios.post(config.BACKEND_BASE_API_URL + `/users/addDashboard/${dashboardData.userId}`, dashboardData);
+    return res.data;
+}
+
 export {
     createTaskFromStage,
-    createStageFromDashboard
+    createStageFromDashboard,
+    createDashboardFromUser
 };
