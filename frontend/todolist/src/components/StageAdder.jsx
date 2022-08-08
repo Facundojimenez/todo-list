@@ -1,9 +1,10 @@
 import { useState, useContext } from 'react';
-import { Dialog, DialogTitle, Button, DialogContent, Card,Typography,DialogContentText, DialogActions, TextField, Box,Grid } from '@mui/material';
+import { Dialog, DialogTitle, Button, DialogContent, Card,Typography,DialogContentText, DialogActions, TextField,} from '@mui/material';
 import AddIcon from '@mui/icons-material/Add';
 import {actualizarCamposForm} from  "../utils/formFunctions"
 import { createStageFromDashboard } from "../utils/createData";
 import UserContext from "../context/UserContext"
+import { useEffect } from 'react';
 
 const styles = {
   stageContainer: {
@@ -16,16 +17,24 @@ const styles = {
   }
 }
 
-export default function StageAdder(props) {
-  const {addStageRender} = useContext(UserContext)
+export default function StageAdder() {
+  const {addStageRender, currentDashboard} = useContext(UserContext)
   const [open, setOpen] = useState(false);
   const [StageData, setStageData] = useState({
     title: "",
     order: "",
-    tasks: [],
-    ...props
-  })
+    dashboardId: currentDashboard._id,
+    tasks: []
+  } )
 
+  useEffect(() => {
+    setStageData({
+      title: "",
+      order: "",
+      dashboardId: currentDashboard._id,
+      tasks: []
+    })
+  }, [currentDashboard])
 
   const handleClickOpen = () => {
     setOpen(true);
@@ -43,7 +52,7 @@ export default function StageAdder(props) {
     const newStage = await createStageFromDashboard(StageData);
     handleClose();
     addStageRender(newStage)
-    setStageData({title: "", description: "", ...props})
+    setStageData({title: "", description: ""})
   }
 
 

@@ -7,15 +7,15 @@ import {actualizarCamposForm} from "../utils/formFunctions";
 import { loginUser } from "../utils/userLogin";
 import { useNavigate } from "react-router-dom";
 import UserContext from "../context/UserContext";
-import { useContext, useEffect } from "react";
+import { useContext } from "react";
 
 const useStyles = makeStyles({
     formContainer:{
         display: "flex",
         justifyContent: "center",
-        padding: "16px",
-        minHeight: "400px",
-        maxHeight: "500px",
+        alignItems: "space-around",
+        padding: "2em 1em",
+        minHeight: "450px",
         maxWidth: "400px"
     },
     formInnerContainer:{

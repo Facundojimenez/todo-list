@@ -13,9 +13,9 @@ const useStyles = makeStyles({
     formContainer:{
         display: "flex",
         justifyContent: "center",
-        padding: "16px",
-        minHeight: "400px",
-        maxHeight: "600px",
+        alignItems: "space-around",
+        padding: "2em 1em",
+        minHeight: "550px",
         maxWidth: "400px"
     },
     formInnerContainer:{
@@ -64,12 +64,12 @@ const SignUpForm = () =>{
                         ¡Registrarse!
                     </Typography>
                     <form>
-                        <Grid container spacing={4}>
+                        <Grid container spacing={2}>
                             <Grid item xs={12} md={12}>
                                 <TextField fullWidth id="username" label="Nombre de usuario" variant="outlined" onChange={handleInputChange}/>
                             </Grid>
                             <Grid item xs={12}>
-                                <TextField required fullWidth helperText="El email es obligatorio" id="email" label="Email" variant="outlined" onChange={handleInputChange}/> 
+                                <TextField required fullWidth  id="email" label="Email" variant="outlined" onChange={handleInputChange}/> 
                             </Grid>
                             <Grid item xs={12} md={12}>
                                 <TextField fullWidth id="password" label="Contraseña" variant="outlined"  type="password" onChange={handleInputChange}/>

@@ -1,7 +1,7 @@
 import { Stack, Typography } from "@mui/material";
 import { Container, Box } from "@mui/system";
 import NavBar from "../components/NavBar";
-import Stage from "./Stage";
+import Stage from "../components/Stage";
 import { useContext, useState } from "react";
 import UserContext from "../context/UserContext";
 import StageAdder from "../components/StageAdder";
@@ -76,7 +76,7 @@ const DashboardPage = () => {
                                     )
                                 })
                             }
-                            <StageAdder dashboardId={currentDashboard._id}/>
+                            <StageAdder/>
                         </Stack>
                     </Container>
 

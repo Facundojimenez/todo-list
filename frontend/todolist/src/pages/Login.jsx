@@ -4,10 +4,10 @@ import { makeStyles } from '@mui/styles';
 
 const useStyles = makeStyles({
 	contactFormContainer:{
-		minHeight: "80vh",
+		minHeight: "100vh",
 		display: "flex",
+        alignItems: "center",
 		justifyContent: "center",
-		padding: "48px 16px",
 	}
 })
 

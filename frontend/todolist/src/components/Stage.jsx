@@ -1,9 +1,9 @@
 import { Stack, Box, Divider, IconButton, CardContent, CardHeader, Card, Dialog, DialogTitle, Button, DialogContent, DialogContentText, DialogActions, TextField, Grid } from "@mui/material";
 import { MoreVert} from '@mui/icons-material';
 import { useState, useEffect, useContext } from "react";
-import Task from "../components/Task";
+import Task from "./Task";
 import UserContext from "../context/UserContext";
-import TaskAdder from "../components/TaskAdder";
+import TaskAdder from "./TaskAdder";
 import { deleteStageFromDashboard } from "../utils/deleteData";
 import { updateStageFromDashboard } from "../utils/updateData";
 
@@ -37,7 +37,7 @@ const Stage = ({title, stageId}) =>{
         // console.log("se activo useEffect de stage")
         // console.log(stageFind.tasks)
         
-    }, [currentDashboard])
+    }, [currentDashboard, stageId])
 
     const handleClickOpen = () => {
         setOpen(true);
