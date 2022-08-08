@@ -9,6 +9,7 @@ import { updateStageFromDashboard } from "../utils/updateData";
 
 const styles = {
     stageContainer: {
+        minHeight: "80vh"
         // backgroundColor: "#00ff00",
         // padding: "2px"
     }

@@ -9,16 +9,20 @@ import EditIcon from '@mui/icons-material/Edit';
 import {updateDashboardFromUser} from "../utils/updateData"
 import {IconButton, Button, TextField, Dialog, Grid, DialogTitle, DialogContent, DialogContentText, DialogActions} from "@mui/material";
 import { deleteDashboardFromUser } from "../utils/deleteData";
+import Footer from "../components/Footer"
 
 const styles = {
+    dashboardContainer: {
+        backgroundColor: "#99c7f2"
+    },
     stagesContainer: {
-        backgroundColor: "#99c7f2",
-        overflow: "scroll"
+        overflow: "auto",
+        paddingBottom: "2em"
     }
 }
 
 const DashboardPage = () => {
-    const {user, setUser, currentDashboard, setCurrentDashboard} = useContext(UserContext);
+    const {user, setUser, currentDashboard} = useContext(UserContext);
     const [open, setOpen] = useState(false);
     console.log(user)
     console.log(currentDashboard)
@@ -55,57 +59,61 @@ const DashboardPage = () => {
     if(currentDashboard){
         return(
             <>
-                <NavBar/>
-                <Container sx={styles.stagesContainer} maxWidth="false">
-                    <Typography variant="h2" align="center">
+                <Box sx={styles.dashboardContainer}>
+                    <NavBar/>
+                    <Typography sx={{margin: "0.3em 0"}} variant="h2" align="center">
                         {currentDashboard.title}
                         <IconButton size="large" onClick={handleClickOpen}>
                             <EditIcon />
                         </IconButton>
                     </Typography>
-                    <Stack direction="row" justifyContent="flex-start" alignItems="stretch" spacing={2}> 
-                        {
-                            !currentDashboard.stages ? "loading" : currentDashboard.stages.map(stage => {
-                                return (
-                                    <Stage title={stage.title} tasks={stage.tasks} dashboardId={stage.dashboardId} stageId={stage._id} key={stage._id} /> 
-                                )
-                            })
-                        }
-                        <StageAdder dashboardId={currentDashboard._id}/>
-                    </Stack>
-                </Container>
+                    <Container sx={styles.stagesContainer} maxWidth="false">
+                        <Stack direction="row" justifyContent="flex-start" alignItems="stretch" spacing={2}> 
+                            {
+                                !currentDashboard.stages ? "loading" : currentDashboard.stages.map(stage => {
+                                    return (
+                                        <Stage title={stage.title} tasks={stage.tasks} dashboardId={stage.dashboardId} stageId={stage._id} key={stage._id} /> 
+                                    )
+                                })
+                            }
+                            <StageAdder dashboardId={currentDashboard._id}/>
+                        </Stack>
+                    </Container>
 
-                <Dialog open={open} onClose={handleClose} fullWidth={true} maxWidth="sm">
-                    <DialogTitle>Editar dashboard</DialogTitle>
-                    <DialogContent>
-                        <DialogContentText>
-                            Titulo:
-                        </DialogContentText>
-                        <TextField
-                            autoFocus
-                            margin="dense"
-                            id="title"
-                            defaultValue={currentDashboard.title}
-                            type="text"
-                            fullWidth
-                            variant="standard"
-                            onChange={handleInputChange}
-                        />
-                    </DialogContent>
-                    <DialogActions>
-                    <Grid container>
-                        <Grid item xs={4} justifyContent="space-between">
-                        <Button variant="outlined" color="error" onClick={deleteDashboard}>Eliminar</Button>
+                    <Dialog open={open} onClose={handleClose} fullWidth={true} maxWidth="sm">
+                        <DialogTitle>Editar dashboard</DialogTitle>
+                        <DialogContent>
+                            <DialogContentText>
+                                Titulo:
+                            </DialogContentText>
+                            <TextField
+                                autoFocus
+                                margin="dense"
+                                id="title"
+                                defaultValue={currentDashboard.title}
+                                type="text"
+                                fullWidth
+                                variant="standard"
+                                onChange={handleInputChange}
+                            />
+                        </DialogContent>
+                        <DialogActions>
+                        <Grid container>
+                            <Grid item xs={4} justifyContent="space-between">
+                            <Button variant="outlined" color="error" onClick={deleteDashboard}>Eliminar</Button>
+                            </Grid>
+                            <Grid item xs={8}>
+                            <Box display="flex" justifyContent="flex-end">
+                            <Button onClick={handleClose}>Cancelar</Button>
+                            <Button onClick={updateDashboard}>Guardar</Button>
+                            </Box>
+                            </Grid>
                         </Grid>
-                        <Grid item xs={8}>
-                        <Box display="flex" justifyContent="flex-end">
-                        <Button onClick={handleClose}>Cancelar</Button>
-                        <Button onClick={updateDashboard}>Guardar</Button>
-                        </Box>
-                        </Grid>
-                    </Grid>
-                    </DialogActions>
-                </Dialog>
+                        </DialogActions>
+                    </Dialog>
+
+                    <Footer/>
+                </Box>
             </>
         )
     }

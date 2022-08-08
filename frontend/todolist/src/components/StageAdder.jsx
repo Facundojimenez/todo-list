@@ -5,6 +5,17 @@ import {actualizarCamposForm} from  "../utils/formFunctions"
 import { createStageFromDashboard } from "../utils/createData";
 import UserContext from "../context/UserContext"
 
+const styles = {
+  stageContainer: {
+      minHeight: "80vh",
+      padding: "0.5em",
+      minWidth: "300px",
+      bgcolor: "rgba(235,235,235, 0.8)"
+      // backgroundColor: "#00ff00",
+      // padding: "2px"
+  }
+}
+
 export default function StageAdder(props) {
   const {addStageRender} = useContext(UserContext)
   const [open, setOpen] = useState(false);
@@ -41,7 +52,7 @@ export default function StageAdder(props) {
     <>
       {/* tarea */}
 
-      <Card sx={{ padding: "0.5em", minWidth: "345px", bgcolor: "rgba(235,235,235, 0.8)" }}>
+      <Card sx={styles.stageContainer}>
           <Button sx={{padding: "1em"}} fullWidth variant="contained" color="primary" onClick={handleClickOpen} startIcon={<AddIcon/>}>
             <Typography>
               Agregar Stage
