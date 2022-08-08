@@ -21,7 +21,6 @@ const addDashboardToUser_DB = async (userId, dashboard) => {
 
 const updateDashboardFromUser_DB = async (userId, newData) => {
     const userUpdate = await getUserById_DB(userId);
-
     const dashboardUpdate = userUpdate.dashboards.find(dashboardIteration => dashboardIteration._id === newData.dashboardId);
     
     if(newData.title){
@@ -35,7 +34,7 @@ const updateDashboardFromUser_DB = async (userId, newData) => {
         return dashboardIteration;
     })
 
-    return await userUpdate.save()
+    return await userUpdate.save();
 }
 
 const deleteDashboardFromUser_DB = async (userId, dashboardId) => {

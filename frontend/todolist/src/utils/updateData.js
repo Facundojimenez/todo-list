@@ -13,7 +13,14 @@ const updateStageFromDashboard = async (stageData) => {
     return res.data;
 }
 
+const updateDashboardFromUser = async (dashboardData) => {
+    console.log(dashboardData)
+    const res = await Axios.put(config.BACKEND_BASE_API_URL + `/users/updateDashboard/${dashboardData.userId}`, dashboardData);
+    return res.data;
+}
+
 export {
     updateTaskFromStage,
-    updateStageFromDashboard
+    updateStageFromDashboard,
+    updateDashboardFromUser
 };

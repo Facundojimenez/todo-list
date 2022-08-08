@@ -17,7 +17,7 @@ export default function NavBar() {
   const {user, setUser, setCurrentDashboard} = useContext(UserContext)
   const navigate = useNavigate();
 
-  const handleSubmit = async () =>{
+  const handleLogout = async () =>{
     await logoutUser()
     navigate("/login")
     setUser(null)
@@ -35,7 +35,7 @@ export default function NavBar() {
           <Typography variant="h6" component="div" sx={{ flexGrow: 1 }} align="center">
             Hola, {user.username}
           </Typography>
-          <Button color="inherit" onClick={handleSubmit}>Cerrar sesión</Button>
+          <Button color="inherit" onClick={handleLogout}>Cerrar sesión</Button>
         </Toolbar>
       </AppBar>
     </Box>
