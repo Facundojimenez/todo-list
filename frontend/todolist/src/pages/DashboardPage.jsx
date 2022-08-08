@@ -8,6 +8,7 @@ import StageAdder from "../components/StageAdder";
 import EditIcon from '@mui/icons-material/Edit';
 import {updateDashboardFromUser} from "../utils/updateData"
 import {IconButton, Button, TextField, Dialog, Grid, DialogTitle, DialogContent, DialogContentText, DialogActions} from "@mui/material";
+import { deleteDashboardFromUser } from "../utils/deleteData";
 
 const styles = {
     stagesContainer: {
@@ -33,7 +34,9 @@ const DashboardPage = () => {
         setOpen(false);
     }
 
-    const deleteDashboard = () => {
+    const deleteDashboard = async () => {
+        const updatedUser = await deleteDashboardFromUser(user._id, currentDashboard._id);
+        setUser(updatedUser);
         setOpen(false);
     }
 

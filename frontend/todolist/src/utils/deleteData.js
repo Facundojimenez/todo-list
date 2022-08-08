@@ -11,7 +11,13 @@ const deleteStageFromDashboard = async (dashboardId, stageId) => {
         return res.data;
 }
 
+const deleteDashboardFromUser= async (userId, dashboardId) => {
+        const res = await Axios.delete(config.BACKEND_BASE_API_URL + `/users/deleteDashboard/${userId}?dashboardId=${dashboardId}`);
+        return res.data;
+}
+
 export {
     deleteTaskFromStage,
-    deleteStageFromDashboard
+    deleteStageFromDashboard,
+    deleteDashboardFromUser
 };
