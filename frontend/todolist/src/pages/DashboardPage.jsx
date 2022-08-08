@@ -1,7 +1,7 @@
 import { Stack, Typography } from "@mui/material";
 import { Container, Box } from "@mui/system";
 import NavBar from "../components/NavBar";
-import Stage from "./Stage";
+import Stage from "../components/Stage";
 import { useContext, useState } from "react";
 import UserContext from "../context/UserContext";
 import StageAdder from "../components/StageAdder";
@@ -20,6 +20,7 @@ const styles = {
         paddingBottom: "2em"
     }
 }
+
 
 const DashboardPage = () => {
     const {user, setUser, currentDashboard} = useContext(UserContext);
@@ -59,15 +60,17 @@ const DashboardPage = () => {
     if(currentDashboard){
         return(
             <>
-                <Box sx={styles.dashboardContainer}>
+
+                <Box sx={styles.appContainer}>
                     <NavBar/>
-                    <Typography sx={{margin: "0.3em 0"}} variant="h2" align="center">
+                    <Typography variant="h2" align="center" sx={styles.dashboardTitle}>
                         {currentDashboard.title}
                         <IconButton size="large" onClick={handleClickOpen}>
                             <EditIcon />
                         </IconButton>
                     </Typography>
                     <Container sx={styles.stagesContainer} maxWidth="false">
+
                         <Stack direction="row" justifyContent="flex-start" alignItems="stretch" spacing={2}> 
                             {
                                 !currentDashboard.stages ? "loading" : currentDashboard.stages.map(stage => {
@@ -79,6 +82,8 @@ const DashboardPage = () => {
                             <StageAdder dashboardId={currentDashboard._id}/>
                         </Stack>
                     </Container>
+
+                    <Footer/>
 
                     <Dialog open={open} onClose={handleClose} fullWidth={true} maxWidth="sm">
                         <DialogTitle>Editar dashboard</DialogTitle>
@@ -111,8 +116,6 @@ const DashboardPage = () => {
                         </Grid>
                         </DialogActions>
                     </Dialog>
-
-                    <Footer/>
                 </Box>
             </>
         )

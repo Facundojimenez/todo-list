@@ -10,7 +10,7 @@ import { makeStyles } from "@mui/styles";
 const useStyles = makeStyles({
   body: {
     backgroundColor: CustomTheme.palette.background.default,
-    height: "100%"
+    height: "100vh"
   } 
 })
 

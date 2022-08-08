@@ -1,9 +1,10 @@
 import { useState, useContext } from 'react';
-import { Dialog, DialogTitle, Button, DialogContent, Card,Typography,DialogContentText, DialogActions, TextField, Box,Grid } from '@mui/material';
+import { Dialog, DialogTitle, Button, DialogContent, Card,Typography,DialogContentText, DialogActions, TextField } from '@mui/material';
 import AddIcon from '@mui/icons-material/Add';
 import {actualizarCamposForm} from  "../utils/formFunctions"
 import { createStageFromDashboard } from "../utils/createData";
 import UserContext from "../context/UserContext"
+import styles from "../styles/styles"
 
 const styles = {
   stageContainer: {
@@ -52,7 +53,8 @@ export default function StageAdder(props) {
     <>
       {/* tarea */}
 
-      <Card sx={styles.stageContainer}>
+
+      <Card sx={styles.stageAdderContainer}>
           <Button sx={{padding: "1em"}} fullWidth variant="contained" color="primary" onClick={handleClickOpen} startIcon={<AddIcon/>}>
             <Typography>
               Agregar Stage

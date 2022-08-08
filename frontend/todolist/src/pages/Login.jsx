@@ -1,21 +1,12 @@
 import LoginForm from "../components/LoginForm";
 import {  Box } from "@mui/material";
-import { makeStyles } from '@mui/styles';
+import styles from "../styles/styles"
 
-const useStyles = makeStyles({
-	contactFormContainer:{
-		minHeight: "80vh",
-		display: "flex",
-		justifyContent: "center",
-		padding: "48px 16px",
-	}
-})
 
-const Login = () =>{
-    const classes = useStyles();
+const Login= () =>{
     return (
         <>
-            <Box className={classes.contactFormContainer}>
+            <Box sx={styles.logFormContainer}>
                 <LoginForm/>
             </Box>
         </>

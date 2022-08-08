@@ -13,10 +13,9 @@ const useStyles = makeStyles({
     formContainer:{
         display: "flex",
         justifyContent: "center",
-        padding: "16px",
-        minHeight: "400px",
-        maxHeight: "600px",
-        maxWidth: "400px"
+        padding: "1em",
+        height: "35em",
+        width: "30em"
     },
     formInnerContainer:{
         display: "flex",
@@ -24,13 +23,6 @@ const useStyles = makeStyles({
         justifyContent: "space-evenly",
         alignItems: "center",
         width: "85%"
-    },
-    botonEnviar:{
-        marginTop: "320px"
-    },
-    backdrop:{
-        zIndex: 99,
-        color: "#fff"
     }
 })
 
@@ -68,15 +60,15 @@ const SignUpForm = () =>{
                             <Grid item xs={12} md={12}>
                                 <TextField fullWidth id="username" label="Nombre de usuario" variant="outlined" onChange={handleInputChange}/>
                             </Grid>
-                            <Grid item xs={12}>
-                                <TextField required fullWidth helperText="El email es obligatorio" id="email" label="Email" variant="outlined" onChange={handleInputChange}/> 
+                            <Grid item xs={12} md={12}>
+                                <TextField required fullWidth  id="email" label="Email" variant="outlined" onChange={handleInputChange}/> 
                             </Grid>
                             <Grid item xs={12} md={12}>
                                 <TextField fullWidth id="password" label="Contraseña" variant="outlined"  type="password" onChange={handleInputChange}/>
                             </Grid>
                         </Grid>
                         <Box textAlign="center" marginTop="30px">
-                            <Button className={classes.botonEnviar} fullWidth variant="contained" color="primary" onClick={handleSubmit}>
+                            <Button  fullWidth variant="contained" color="primary" onClick={handleSubmit}>
                                 REGISTRARSE
                             </Button>
                         </Box>

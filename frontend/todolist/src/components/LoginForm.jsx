@@ -7,16 +7,15 @@ import {actualizarCamposForm} from "../utils/formFunctions";
 import { loginUser } from "../utils/userLogin";
 import { useNavigate } from "react-router-dom";
 import UserContext from "../context/UserContext";
-import { useContext, useEffect } from "react";
+import { useContext } from "react";
 
 const useStyles = makeStyles({
     formContainer:{
         display: "flex",
         justifyContent: "center",
-        padding: "16px",
-        minHeight: "400px",
-        maxHeight: "500px",
-        maxWidth: "400px"
+        padding: "1em",
+        height: "30em",
+        width: "30em"
     },
     formInnerContainer:{
         display: "flex",
@@ -24,14 +23,8 @@ const useStyles = makeStyles({
         justifyContent: "space-evenly",
         alignItems: "center",
         width: "85%"
-    },
-    botonEnviar:{
-        marginTop: "320px"
-    },
-    backdrop:{
-        zIndex: 99,
-        color: "#fff"
     }
+    
 })
 
 const LoginForm = () =>{
@@ -74,7 +67,7 @@ const LoginForm = () =>{
                             </Grid>
                         </Grid>
                         <Box textAlign="center" marginTop="30px">
-                            <Button className={classes.botonEnviar} fullWidth variant="contained" color="primary" onClick={handleSubmit}>
+                            <Button fullWidth variant="contained" color="primary" onClick={handleSubmit}>
                                 INICIAR SESION
                             </Button>
                         </Box>

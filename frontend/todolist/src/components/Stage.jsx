@@ -1,11 +1,14 @@
 import { Stack, Box, Divider, IconButton, CardContent, CardHeader, Card, Dialog, DialogTitle, Button, DialogContent, DialogContentText, DialogActions, TextField, Grid } from "@mui/material";
 import { MoreVert} from '@mui/icons-material';
 import { useState, useEffect, useContext } from "react";
-import Task from "../components/Task";
+import Task from "./Task";
 import UserContext from "../context/UserContext";
-import TaskAdder from "../components/TaskAdder";
+import TaskAdder from "./TaskAdder";
 import { deleteStageFromDashboard } from "../utils/deleteData";
 import { updateStageFromDashboard } from "../utils/updateData";
+import styles from "../styles/styles"
+
+
 
 const styles = {
     stageContainer: {
@@ -14,6 +17,7 @@ const styles = {
         // padding: "2px"
     }
 }
+
 
 const Stage = ({title, stageId}) =>{
     const {currentDashboard, deleteStageRender} = useContext(UserContext);
@@ -34,10 +38,8 @@ const Stage = ({title, stageId}) =>{
     useEffect(() => {
         const stageFind = currentDashboard.stages.find((stage) => stage._id === stageId);
         setTasks(stageFind.tasks)
-        // console.log("se activo useEffect de stage")
-        // console.log(stageFind.tasks)
         
-    }, [currentDashboard])
+    }, [currentDashboard, stageId])
 
     const handleClickOpen = () => {
         setOpen(true);
@@ -65,7 +67,7 @@ const Stage = ({title, stageId}) =>{
 
     return(
         <>  
-            <Card sx={{ minWidth: "345px", bgcolor: "#ebebeb" }}>
+            <Card sx={styles.stageContainer}>
                 {/* Encabezado del stage */}
                 <CardHeader
                     action={

@@ -70,7 +70,8 @@ export default function CustomizedMenus() {
     const dashboardId = parseInt(event.target.getAttribute("dashboardid"))
     console.log(dashboardId)
     changeDashboard(dashboardId)
-    handleClose();
+    handleCloseSelector();
+    handleCloseForm();
   }
 
   const handleInputChange = (event) =>{
@@ -89,10 +90,11 @@ export default function CustomizedMenus() {
     console.log(formData)
     const updatedUser =  await createDashboardFromUser(formData);
     setUser(updatedUser)
-    handleClose();
+    handleCloseSelector();
+    handleCloseForm();
   }
 
-  const handleClose = () => {
+  const handleCloseSelector = () => {
     setAnchorEl(null);
   };
 
@@ -102,7 +104,7 @@ export default function CustomizedMenus() {
         <Button aria-controls={open ? 'demo-customized-menu' : undefined} variant="contained" disableElevation onClick={handleClick} endIcon={<KeyboardArrowDownIcon />}>
           Elegir dashboard
         </Button>
-        <StyledMenu anchorEl={anchorEl} open={open} onClose={handleClose}>
+        <StyledMenu anchorEl={anchorEl} open={open} onClose={handleCloseSelector}>
           {
             user.dashboards.map(dashboard => {
               return (
