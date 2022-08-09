@@ -83,7 +83,6 @@ export default function DashboardSelector() {
   };
 
   const handleAddDashboard = async () => {
-    // console.log(formData)
     const updatedUser =  await createDashboardFromUser(formData);
     setUser(updatedUser)
     handleClose();

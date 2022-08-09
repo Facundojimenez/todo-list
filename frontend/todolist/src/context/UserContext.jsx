@@ -16,8 +16,13 @@ export const UserProvider = ({ children }) => {
 
 	useEffect(() => {
 		const getStages = async () => {
-			const dashboardFind = user.dashboards.filter(dashboard => dashboard._id === currentDashboard._id)[0]
-
+			let dashboardFind;
+			if(currentDashboard){
+				dashboardFind = user.dashboards.filter(dashboard => dashboard._id === currentDashboard._id)[0]
+			}
+			else{
+				dashboardFind = user.dashboards.filter(dashboard => dashboard._id === user.dashboards[0]._id)[0]
+			}
 			let dashboardStages = await fetchStages(dashboardFind._id); 
 			const dashboardUpdate = {
 				...dashboardFind,
@@ -26,6 +31,7 @@ export const UserProvider = ({ children }) => {
 				]
 			}
 			setCurrentDashboard(dashboardUpdate);
+
 		}
 		// console.log(user.dashboards)
 		if(user && user.dashboards.length > 0){

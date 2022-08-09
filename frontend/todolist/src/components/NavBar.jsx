@@ -31,7 +31,7 @@ export default function NavBar() {
           </Typography>
           {currentDashboard ? <DashboardSelector/> : <></>}
           <Typography variant="h6" component="div" sx={{flexGrow: 1}}>
-              
+       
           </Typography>
           <Button color="inherit" onClick={handleLogout}>Cerrar sesión</Button>
         </Toolbar>

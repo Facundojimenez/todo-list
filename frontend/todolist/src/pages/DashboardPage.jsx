@@ -32,8 +32,8 @@ const styles = {
 const DashboardPage = () => {
     const {user, setUser, currentDashboard, setCurrentDashboard} = useContext(UserContext);
     const [open, setOpen] = useState(false);
-    console.log(user)
-    console.log(currentDashboard)
+    // console.log(user)
+    // console.log(currentDashboard)
 
     let formData = currentDashboard; 
 
