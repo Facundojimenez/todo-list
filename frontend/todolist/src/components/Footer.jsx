@@ -3,7 +3,6 @@ import { Container, Box } from "@mui/system";
 import LinkedInIcon from '@mui/icons-material/LinkedIn';
 import GitHubIcon from '@mui/icons-material/GitHub';
 import CustomTheme from "../context/CustomTheme"
-// import styles from "../styles/styles"
 
 const styles = {
     letrasBlancas: {

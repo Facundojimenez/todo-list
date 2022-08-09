@@ -78,16 +78,7 @@ export default function StageAdder() {
             <DialogContentText>
                 Titulo del stage:
             </DialogContentText>
-            <TextField
-              autoFocus
-              margin="dense"
-              id="title"
-              defaultValue={StageData.title}
-              type="text"
-              fullWidth
-              variant="standard"
-              onChange={handleInputChange}
-            />
+            <TextField autoFocus margin="dense" id="title" defaultValue={StageData.title} type="text" fullWidth variant="standard" onChange={handleInputChange}/>
         </DialogContent>
         <DialogActions>
           <Button onClick={handleClose}>Cancelar</Button>

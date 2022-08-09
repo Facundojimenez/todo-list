@@ -16,7 +16,7 @@ export const UserProvider = ({ children }) => {
 
 	useEffect(() => {
 		const getStages = async () => {
-			let dashboardStages = await fetchStages(user.dashboards[0]._id); ///DEBERIA BUSCAR SOLO LAS STAGES DEL DASHBOARD ACTUAL
+			let dashboardStages = await fetchStages(user.dashboards[0]._id); 
 			const dashboardUpdate = {
 				...user.dashboards[0],
 				stages: [

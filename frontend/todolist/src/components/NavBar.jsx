@@ -23,14 +23,14 @@ export default function NavBar() {
 }
 
   return (
-    <Box sx={{ flexGrow: 1 }}>
+    <Box>
       <AppBar position="static">
         <Toolbar>
           <Typography variant="h6" component="div"  align="left">
               TaskMaster
           </Typography>
           <DashboardSelector/>
-          <Typography variant="h6" component="div" sx={{flexGrow: 1}}  align="left">
+          <Typography variant="h6" component="div" sx={{flexGrow: 1}}>
               
           </Typography>
           <Button color="inherit" onClick={handleLogout}>Cerrar sesión</Button>

@@ -69,29 +69,11 @@ export default function Task(props) {
             <DialogContentText>
                 Titulo de la tarea:
               </DialogContentText>
-              <TextField
-                autoFocus
-                margin="dense"
-                id="title"
-                defaultValue={taskData.title}
-                type="text"
-                fullWidth
-                variant="standard"
-                onChange={handleInputChange}
-              />
+              <TextField autoFocus margin="dense" id="title" defaultValue={taskData.title} type="text" fullWidth variant="standard" onChange={handleInputChange}/>
             <DialogContentText>
               Descripción:
             </DialogContentText>
-            <TextField
-              autoFocus
-              margin="dense"
-              id="description"
-              defaultValue={taskData.description}
-              type="text"
-              fullWidth
-              variant="standard"
-              onChange={handleInputChange}
-          />
+            <TextField autoFocus margin="dense" id="description" defaultValue={taskData.description} type="text" fullWidth variant="standard" onChange={handleInputChange}  />
         </DialogContent>
         <DialogActions>
           <Grid container>

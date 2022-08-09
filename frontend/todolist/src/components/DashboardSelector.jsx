@@ -1,7 +1,5 @@
 import { styled, alpha } from '@mui/material/styles';
-import {Button, Dialog, DialogActions, DialogTitle, DialogContent, DialogContentText, TextField} from '@mui/material';
-import Menu from '@mui/material/Menu';
-import MenuItem from '@mui/material/MenuItem';
+import {Button, Dialog, DialogActions, DialogTitle, DialogContent, DialogContentText, TextField, Menu, MenuItem} from '@mui/material';
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import {useState, useContext } from "react"
 import UserContext from '../context/UserContext';
@@ -126,16 +124,7 @@ export default function CustomizedMenus() {
               <DialogContentText>
                   Titulo:
               </DialogContentText>
-              <TextField
-                autoFocus
-                margin="dense"
-                id="title"
-                defaultValue=""
-                type="text"
-                fullWidth
-                variant="standard"
-                onChange={handleInputChange}
-              />
+              <TextField autoFocus margin="dense" id="title" defaultValue="" type="text" fullWidth variant="standard" onChange={handleInputChange} />
           </DialogContent>
           <DialogActions>
             <Button onClick={handleCloseForm}>Cancelar</Button>

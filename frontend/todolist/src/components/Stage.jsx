@@ -15,7 +15,7 @@ const styles = {
     }
 }
 
-const Stage = ({title, stageId}) =>{
+const Stage = ({stageId}) =>{
     const {currentDashboard, deleteStageRender} = useContext(UserContext);
     const [open, setOpen] = useState(false);
 
@@ -34,9 +34,7 @@ const Stage = ({title, stageId}) =>{
     useEffect(() => {
         const stageFind = currentDashboard.stages.find((stage) => stage._id === stageId);
         setTasks(stageFind.tasks)
-        // console.log("se activo useEffect de stage")
-        // console.log(stageFind.tasks)
-        
+
     }, [currentDashboard, stageId])
 
     const handleClickOpen = () => {
