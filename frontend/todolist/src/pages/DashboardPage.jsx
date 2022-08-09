@@ -30,7 +30,7 @@ const styles = {
 }
 
 const DashboardPage = () => {
-    const {user, setUser, currentDashboard} = useContext(UserContext);
+    const {user, setUser, currentDashboard, setCurrentDashboard} = useContext(UserContext);
     const [open, setOpen] = useState(false);
     console.log(user)
     console.log(currentDashboard)
@@ -48,6 +48,12 @@ const DashboardPage = () => {
 
     const deleteDashboard = async () => {
         const updatedUser = await deleteDashboardFromUser(user._id, currentDashboard._id);
+        if(updatedUser.dashboards.length > 0){
+            setCurrentDashboard(updatedUser.dashboards[0])
+        }
+        else{
+            setCurrentDashboard(null)
+        }
         setUser(updatedUser);
         setOpen(false);
     }
