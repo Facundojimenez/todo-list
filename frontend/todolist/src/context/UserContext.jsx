@@ -29,6 +29,9 @@ export const UserProvider = ({ children }) => {
 		if(user && user.dashboards.length > 0){
 			getStages();
 		}
+		else{
+			setCurrentDashboard(null)
+		}
 		
 	}, [user])
 	

@@ -12,7 +12,6 @@ const signupUser = async (userData) => {
         console.log("signup fallido")
 
     }
-    console.log(response);
     return response;
 
 }

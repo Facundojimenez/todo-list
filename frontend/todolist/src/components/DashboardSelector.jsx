@@ -49,7 +49,7 @@ const StyledMenu = styled((props) => (
   },
 }));
 
-export default function CustomizedMenus() {
+export default function DashboardSelector() {
 	const {changeDashboard, currentDashboard ,user, setUser} = useContext(UserContext)
 
   const [anchorEl, setAnchorEl] = useState(null);
@@ -88,6 +88,7 @@ export default function CustomizedMenus() {
     const updatedUser =  await createDashboardFromUser(formData);
     setUser(updatedUser)
     handleClose();
+    handleCloseForm()
   }
 
   const handleClose = () => {
@@ -134,5 +135,37 @@ export default function CustomizedMenus() {
 
       </div>
     );
+  }
+  else{
+    return(
+      <div>
+        <Button aria-controls={open ? 'demo-customized-menu' : undefined} variant="contained" disableElevation onClick={handleClick} endIcon={<KeyboardArrowDownIcon />}>
+          Crear mi primer dashboard
+        </Button>
+        <StyledMenu anchorEl={anchorEl} open={open} onClose={handleClose}>
+          <MenuItem onClick={handleClickOpenForm}>
+              <DashboardCustomizeIcon/> 
+                Nuevo Dashboard
+          </MenuItem>
+        </StyledMenu>
+
+        {/* Menu que se abre */}
+        <Dialog open={openForm} onClose={handleCloseForm} fullWidth={true} maxWidth="sm">
+          <DialogTitle>Crear Dashboard</DialogTitle>
+            <DialogContent>
+              <DialogContentText>
+                  Titulo:
+              </DialogContentText>
+              <TextField autoFocus margin="dense" id="title" defaultValue="" type="text" fullWidth variant="standard" onChange={handleInputChange} />
+          </DialogContent>
+          <DialogActions>
+            <Button onClick={handleCloseForm}>Cancelar</Button>
+            <Button onClick={handleAddDashboard}>Guardar</Button>
+          </DialogActions>
+        </Dialog>
+      </div>
+
+      
+    )
   }
 }

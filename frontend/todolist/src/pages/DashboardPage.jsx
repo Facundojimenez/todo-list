@@ -9,11 +9,19 @@ import EditIcon from '@mui/icons-material/Edit';
 import {updateDashboardFromUser} from "../utils/updateData"
 import {IconButton, Button, TextField, Dialog, Grid, DialogTitle, DialogContent, DialogContentText, DialogActions} from "@mui/material";
 import { deleteDashboardFromUser } from "../utils/deleteData";
-import Footer from "../components/Footer"
-
+import GridViewIcon from '@mui/icons-material/GridView';
+import DashboardSelector from "../components/DashboardSelector"
 const styles = {
     dashboardContainer: {
         backgroundColor: "#99c7f2"
+    },
+    noDashboardContainer: {
+        backgroundColor: "#99c7f2",
+        height: "80vh",
+        display: "flex",
+        flexDirection: "column",
+        justifyContent: "center",
+        alignItems: "center"
     },
     stagesContainer: {
         overflow: "auto",
@@ -111,17 +119,23 @@ const DashboardPage = () => {
                         </Grid>
                         </DialogActions>
                     </Dialog>
-
-                    <Footer/>
                 </Box>
             </>
         )
     }
     else{
         return(
-            <>
+            <>  
                 <NavBar/>
-                <h1> no tenes dashboads, crea uno</h1>
+                <Box sx={styles.noDashboardContainer}>
+                    <Typography variant="h2">
+                        No hay dashboards creados
+                    </Typography>
+                    {/* <Button  variant="contained" startIcon={<GridViewIcon/>}>
+                        Crear Dashboard
+                    </Button> */}
+                    <DashboardSelector/>
+                </Box>
             </>
         ) 
     }

@@ -7,7 +7,7 @@ import UserContext from "../context/UserContext"
 
 
 export default function TaskAdder(props) {
-  const {addTaskRender, currentDashboard} = useContext(UserContext)
+  const {addTaskRender} = useContext(UserContext)
   const [open, setOpen] = useState(false);
   const [taskData, setTaskData] = useState({
     title: "",

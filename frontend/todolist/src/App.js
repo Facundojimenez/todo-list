@@ -6,6 +6,10 @@ import CustomTheme from "./context/CustomTheme";
 import { ThemeProvider } from "@emotion/react";
 import {UserProvider}  from "./context/UserContext";
 import { makeStyles } from "@mui/styles";
+import PrivateRoutes from "./utils/PrivateRoutes";
+import NotFound from "./pages/NotFound";
+import Footer from "./components/Footer";
+
 
 const useStyles = makeStyles({
   body: {
@@ -24,11 +28,15 @@ function App() {
           <BrowserRouter>
             <div className={classes.body}>
               <Routes>
-                <Route path="/login" element={ <Login/>}/> 
-                <Route path="/signup" element={ <SignUp/>}/> 
-                <Route path="/dashboard" element={ <DashboardPage/>}/> 
+                <Route path="/login" element={<Login/>}/> 
+                <Route path="/signup" element={<SignUp/>}/> 
+                <Route element={<PrivateRoutes/>}>
+                  <Route path="/dashboard" element={<DashboardPage/>}/> 
+                </Route> 
+                <Route path="*" element={<NotFound/>}/> 
               </Routes>
             </div>
+            <Footer/>
           </BrowserRouter>
         </ThemeProvider>
       </UserProvider>

@@ -12,7 +12,7 @@ import DashboardSelector from './DashboardSelector';
 
 
 export default function NavBar() {
-  const {setUser, setCurrentDashboard} = useContext(UserContext)
+  const {setUser, currentDashboard, setCurrentDashboard} = useContext(UserContext)
   const navigate = useNavigate();
 
   const handleLogout = async () =>{
@@ -20,7 +20,7 @@ export default function NavBar() {
     navigate("/login")
     setUser(null)
     setCurrentDashboard(null);
-}
+  }
 
   return (
     <Box>
@@ -29,7 +29,7 @@ export default function NavBar() {
           <Typography variant="h6" component="div"  align="left">
               TaskMaster
           </Typography>
-          <DashboardSelector/>
+          {currentDashboard ? <DashboardSelector/> : <></>}
           <Typography variant="h6" component="div" sx={{flexGrow: 1}}>
               
           </Typography>
