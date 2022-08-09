@@ -66,7 +66,6 @@ export default function DashboardSelector() {
 
   const handleChangeDashboard = (event) => {
     const dashboardId = parseInt(event.target.getAttribute("dashboardid"))
-    console.log(dashboardId)
     changeDashboard(dashboardId)
     handleClose();
   }
@@ -84,7 +83,7 @@ export default function DashboardSelector() {
   };
 
   const handleAddDashboard = async () => {
-    console.log(formData)
+    // console.log(formData)
     const updatedUser =  await createDashboardFromUser(formData);
     setUser(updatedUser)
     handleClose();

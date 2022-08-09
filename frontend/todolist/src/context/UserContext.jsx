@@ -16,9 +16,11 @@ export const UserProvider = ({ children }) => {
 
 	useEffect(() => {
 		const getStages = async () => {
-			let dashboardStages = await fetchStages(user.dashboards[0]._id); 
+			const dashboardFind = user.dashboards.filter(dashboard => dashboard._id === currentDashboard._id)[0]
+
+			let dashboardStages = await fetchStages(dashboardFind._id); 
 			const dashboardUpdate = {
-				...user.dashboards[0],
+				...dashboardFind,
 				stages: [
 					...dashboardStages
 				]

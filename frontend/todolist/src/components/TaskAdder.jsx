@@ -35,7 +35,11 @@ export default function TaskAdder(props) {
 
     handleClose();
 
-    setTaskData(createdTask)
+    setTaskData({
+      title: "",
+      description: "",
+      ...props
+    })
     addTaskRender(createdTask)
   }
 
