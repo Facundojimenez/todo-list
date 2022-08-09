@@ -11,9 +11,7 @@ const loginUser = async (userData) => {
         console.log("login fallido")
 
     }
-    // console.log(response);
     return response;
-
 }
 
 export {

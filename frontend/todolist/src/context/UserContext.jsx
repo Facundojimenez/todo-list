@@ -31,9 +31,7 @@ export const UserProvider = ({ children }) => {
 				]
 			}
 			setCurrentDashboard(dashboardUpdate);
-
 		}
-		// console.log(user.dashboards)
 		if(user && user.dashboards.length > 0){
 			getStages();
 		}
@@ -57,10 +55,7 @@ export const UserProvider = ({ children }) => {
 			setCurrentDashboard(dashboardUpdate);
 	}
 
-	const addStageRender = (newStage) =>{
-
-		console.log("se agregó el stage " + newStage.title + ": " + newStage.description )
-		
+	const addStageRender = (newStage) =>{		
 		const newDashboard = {
 			...currentDashboard,
 			stages: [
@@ -74,7 +69,6 @@ export const UserProvider = ({ children }) => {
 	}
 
 	const addTaskRender = (newTask) =>{
-		console.log("se agregó el render " + newTask.title + ": " + newTask.description )
 		const stageFind = currentDashboard.stages.find((stage) => stage._id === newTask.stageId);
 		stageFind.tasks.push(newTask)	
 		
@@ -99,12 +93,9 @@ export const UserProvider = ({ children }) => {
 	}
 
 	const deleteTaskRender = (taskDelete) =>{
-		console.log("se borro el render " + taskDelete.title + ": " + taskDelete.description )
 		const stageFind = currentDashboard.stages.find((stage) => stage._id === taskDelete.stageId);
 		stageFind.tasks = stageFind.tasks.filter((task) => task._id !== taskDelete.taskId) 		
 		
-		console.log(stageFind)
-
 		const newStages = currentDashboard.stages.map((stage) => {
 			if(stage._id === stageFind._id){
 				return stageFind
@@ -125,8 +116,6 @@ export const UserProvider = ({ children }) => {
 	}
 
 	const deleteStageRender = (stageDelete) =>{
-		console.log("se borro el render del stage " + stageDelete )
-
 		const updatedStages = currentDashboard.stages.filter((stage) => stage._id !== stageDelete)
 		
 		const newDashboard = {

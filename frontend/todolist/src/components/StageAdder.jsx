@@ -1,21 +1,10 @@
-import { useState, useContext } from 'react';
+import { useState, useContext, useEffect } from 'react';
 import { Dialog, DialogTitle, Button, DialogContent, Card,Typography,DialogContentText, DialogActions, TextField,} from '@mui/material';
 import AddIcon from '@mui/icons-material/Add';
 import {actualizarCamposForm} from  "../utils/formFunctions"
 import { createStageFromDashboard } from "../utils/createData";
 import UserContext from "../context/UserContext"
-import { useEffect } from 'react';
-
-const styles = {
-  stageContainer: {
-      minHeight: "80vh",
-      padding: "0.5em",
-      minWidth: "300px",
-      bgcolor: "rgba(235,235,235, 0.8)"
-      // backgroundColor: "#00ff00",
-      // padding: "2px"
-  }
-}
+import styles from '../styles/styles';
 
 export default function StageAdder() {
   const {addStageRender, currentDashboard} = useContext(UserContext)
@@ -55,21 +44,16 @@ export default function StageAdder() {
     setStageData({title: "", description: ""})
   }
 
-
-  
   return (
     <>
       {/* tarea */}
-
-      <Card sx={styles.stageContainer}>
+      <Card sx={styles.stageAdder}>
           <Button sx={{padding: "1em"}} fullWidth variant="contained" color="primary" onClick={handleClickOpen} startIcon={<AddIcon/>}>
             <Typography>
               Agregar Stage
             </Typography>
           </Button>
       </Card>
-
-
 
       {/* Menu que se abre */}
       <Dialog open={open} onClose={handleClose} fullWidth={true} maxWidth="sm">

@@ -6,16 +6,9 @@ import UserContext from "../context/UserContext";
 import TaskAdder from "./TaskAdder";
 import { deleteStageFromDashboard } from "../utils/deleteData";
 import { updateStageFromDashboard } from "../utils/updateData";
+import styles from "../styles/styles";
 
-const styles = {
-    stageContainer: {
-        minHeight: "80vh"
-        // backgroundColor: "#00ff00",
-        // padding: "2px"
-    }
-}
-
-const Stage = ({stageId}) =>{
+export default function  Stage({stageId}) {
     const {currentDashboard, deleteStageRender} = useContext(UserContext);
     const [open, setOpen] = useState(false);
 
@@ -127,5 +120,3 @@ const Stage = ({stageId}) =>{
         
     )
 }
-
-export default Stage;

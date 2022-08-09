@@ -11,7 +11,6 @@ const logoutUser = async () => {
         console.log("logout fallido")
 
     }
-
     return response;
 
 }

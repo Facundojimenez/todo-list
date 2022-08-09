@@ -1,7 +1,6 @@
 import Axios from "axios";
 import config from "./config";
 
-
 const signupUser = async (userData) => {
     const response = await Axios.post(config.BACKEND_BASE_API_URL + "/users/signup", userData, {withCredentials: true});
 
@@ -13,7 +12,6 @@ const signupUser = async (userData) => {
 
     }
     return response;
-
 }
 
 export {
