@@ -3,11 +3,10 @@ import CustomTheme from "../context/CustomTheme";
 import BrandLogo from "./BrandLogo";
 import { useState, useContext } from "react";
 import {actualizarCamposForm} from "../utils/formFunctions";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import { signupUser } from "../utils/userSignup";
 import UserContext from "../context/UserContext";
 import styles from "../styles/styles";
-
 
 export default function SignUpForm() {
 	const {setUser} = useContext(UserContext);
@@ -51,6 +50,13 @@ export default function SignUpForm() {
 						<Button sx={styles.botonEnviar} fullWidth variant="contained" color="primary" onClick={handleSubmit}>
 								REGISTRARSE
 						</Button>
+					</Box>
+					<Box sx={{paddingTop: "0.7em", display: "flex", justifyContent: "center"}}>
+						<Link to="/login" style={{ textDecoration: 'none' }}>
+							<Typography variant="p" element="h6" color="primary" align="center">
+									¿Ya tenes una cuenta? Iniciá sesión 
+							</Typography>
+						</Link>
 					</Box>
 				</form>
 			</Stack>

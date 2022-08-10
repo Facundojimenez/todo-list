@@ -4,7 +4,7 @@ import BrandLogo from "./BrandLogo";
 import { useState, useContext } from "react";
 import {actualizarCamposForm} from "../utils/formFunctions";
 import { loginUser } from "../utils/userLogin";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import UserContext from "../context/UserContext";
 import styles from "../styles/styles";
 
@@ -43,9 +43,16 @@ export default function LoginForm () {
 						</Grid>
 						</Grid>
 						<Box textAlign="center" marginTop="30px">
-						<Button sx={styles.botonEnviar} fullWidth variant="contained" color="primary" onClick={handleSubmit}>
+						<Button fullWidth variant="contained" color="primary" onClick={handleSubmit}>
 							INICIAR SESION
 						</Button>
+						<Box sx={{paddingTop: "0.7em"}}>
+							<Link to="/signup" style={{ textDecoration: 'none', marginLeft: "0.5em" }}>
+								<Typography variant="p" element="h6" color="primary" align="center">
+									¿No tenés cuenta? Registrate 
+								</Typography>
+							</Link>
+						</Box>
 					</Box>
 				</form>
 			</Stack>

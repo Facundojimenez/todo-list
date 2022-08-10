@@ -50,16 +50,15 @@ export default function Task(props) {
           <Typography variant="h5" component="div">
             {taskData.title}
           </Typography>
-          <Typography sx={{ mb: 1.5 }} color="text.secondary">
-            adjective
-          </Typography>
           <Typography variant="body2">
             {taskData.description}
           </Typography>
         </CardContent>
-        <CardActions>
-          <Button size="small" onClick={handleClickOpen}>Editar</Button>
-        </CardActions>
+        <Box sx={{display: "flex", justifyContent: "flex-end"}}>
+          <CardActions>
+            <Button size="small" onClick={handleClickOpen}>Editar</Button>
+          </CardActions>
+        </Box>
       </Card>
 
       {/* Menu que se abre */}

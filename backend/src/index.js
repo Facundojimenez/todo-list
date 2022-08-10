@@ -35,7 +35,7 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 app.use(cors({
-    origin: "http://localhost:3000",
+    origin: ["http://localhost:3000", "https://task-master-01.herokuapp.com"],
     credentials: true
 }));
 app.use(morgan('dev'))
@@ -46,7 +46,7 @@ app.use("/api/stages", stagesRoutes);
 
  /* -------------------------------- */
 
-
-app.listen(process.env.SERVER_PORT || process.env.PORT, (req, res) => {
-    console.log(`serve iniciado correctamente en el puerto ${process.env.SERVER_PORT}` )
+const PORT = process.env.PORT || process.env.SERVER_PORT
+app.listen(PORT, (req, res) => {
+    console.log(`serve iniciado correctamente en el puerto ${PORT}` )
 })

@@ -11,12 +11,15 @@ const styles = {
         alignItems: "center"
     },
     formContainer:{
+        backgroundColor: ["orange", "red", "green", "yellow"],
+
         display: "flex",
         justifyContent: "center",
-        alignItems: "space-around",
-        padding: "2em 1em",
-        minHeight: "450px",
-        maxWidth: "400px"
+        alignItems: "space-between",
+        padding: "1em 1em",
+        minHeight: "500px",
+        minWidth: ["85%","70%", "40%", null],
+        maxWidth: ["85%","70%", "40%", "500px"]
     },
     formInnerContainer:{
         display: "flex",
