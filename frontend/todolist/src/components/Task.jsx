@@ -3,6 +3,7 @@ import { useState, useContext } from 'react';
 import { updateTaskFromStage } from "../utils/updateData";
 import { deleteTaskFromStage } from '../utils/deleteData';
 import UserContext from "../context/UserContext"
+import Fade from '@mui/material/Fade';
 
 
 export default function Task(props) {
@@ -45,21 +46,23 @@ export default function Task(props) {
   return (
     <>
       {/* tarea */}
-      <Card>
-        <CardContent>
-          <Typography variant="h5" component="div">
-            {taskData.title}
-          </Typography>
-          <Typography variant="body2">
-            {taskData.description}
-          </Typography>
-        </CardContent>
-        <Box sx={{display: "flex", justifyContent: "flex-end"}}>
-          <CardActions>
-            <Button size="small" onClick={handleClickOpen}>Editar</Button>
-          </CardActions>
-        </Box>
-      </Card>
+      <Fade in={true}>
+        <Card>
+          <CardContent>
+            <Typography variant="h5" component="div">
+              {taskData.title}
+            </Typography>
+            <Typography variant="body2">
+              {taskData.description}
+            </Typography>
+          </CardContent>
+          <Box sx={{display: "flex", justifyContent: "flex-end"}}>
+            <CardActions>
+              <Button size="small" onClick={handleClickOpen}>Editar</Button>
+            </CardActions>
+          </Box>
+        </Card>
+      </Fade>
 
       {/* Menu que se abre */}
       <Dialog open={open} onClose={handleClose} fullWidth={true} maxWidth="sm">

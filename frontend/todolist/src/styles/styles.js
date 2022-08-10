@@ -2,17 +2,19 @@ import CustomTheme from "../context/CustomTheme"
 
 
 const styles = {
+    taskMasterLogo:{
+        display: ["none", "none", "inline-block", "inline-block"]
+    },
     mainContainer:{
         backgroundColor: "#99c7f2",
-        height: "90vh",
+        height: "88vh",
         display: "flex",
         flexDirection: "column",
         justifyContent: "center",
         alignItems: "center"
     },
     formContainer:{
-        backgroundColor: ["orange", "red", "green", "yellow"],
-
+        // backgroundColor: ["orange", "red", "green", "yellow"],
         display: "flex",
         justifyContent: "center",
         alignItems: "space-between",

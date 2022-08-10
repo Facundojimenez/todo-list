@@ -7,6 +7,8 @@ import TaskAdder from "./TaskAdder";
 import { deleteStageFromDashboard } from "../utils/deleteData";
 import { updateStageFromDashboard } from "../utils/updateData";
 import styles from "../styles/styles";
+import Grow from '@mui/material/Grow';
+
 
 export default function  Stage({stageId}) {
     const {currentDashboard, deleteStageRender} = useContext(UserContext);
@@ -56,33 +58,35 @@ export default function  Stage({stageId}) {
 
     return(
         <>  
-            <Card sx={{ minWidth: "345px", bgcolor: "#ebebeb" }}>
-                {/* Encabezado del stage */}
-                <CardHeader
-                    action={
-                        <>
-                            <TaskAdder stageId={stageId}/>
-                            <IconButton aria-label="settings" onClick={handleClickOpen}>
-                                <MoreVert />
-                            </IconButton>
-                        </>
-                    }
-                    title={stageData.title}
-                />
-                <Divider sx={{ my: 0.5 }} />
-                {/* Lista de tasks */}
-                <CardContent>
-                    <Stack sx={styles.stageContainer} spacing={2}>
-                        {
-                            tasks.map(task => {
-                                return(
-                                    <Task title={task.title} description={task.description} order={task.order} stageId={stageId} taskId={task._id} key={task._id}/>
-                                )
-                            })
+            <Grow in={true}>
+                <Card sx={{ minWidth: "345px", bgcolor: "#ebebeb" }}>
+                    {/* Encabezado del stage */}
+                    <CardHeader
+                        action={
+                            <>
+                                <TaskAdder stageId={stageId}/>
+                                <IconButton aria-label="settings" onClick={handleClickOpen}>
+                                    <MoreVert />
+                                </IconButton>
+                            </>
                         }
-                    </Stack>
-                </CardContent>
-            </Card>
+                        title={stageData.title}
+                    />
+                    <Divider sx={{ my: 0.5 }} />
+                    {/* Lista de tasks */}
+                    <CardContent>
+                        <Stack sx={styles.stageContainer} spacing={2}>
+                            {
+                                tasks.map(task => {
+                                    return(
+                                        <Task title={task.title} description={task.description} order={task.order} stageId={stageId} taskId={task._id} key={task._id}/>
+                                    )
+                                })
+                            }
+                        </Stack>
+                    </CardContent>
+                </Card>
+            </Grow>
 
             {/* Menu que se abre */}
             <Dialog open={open} onClose={handleClose} fullWidth={true} maxWidth="sm">

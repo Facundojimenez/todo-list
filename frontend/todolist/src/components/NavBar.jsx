@@ -5,7 +5,7 @@ import { Button, Box, AppBar, Toolbar, Typography } from '@mui/material';
 import { logoutUser } from '../utils/userLogout';
 import { useNavigate } from "react-router-dom";
 import DashboardSelector from './DashboardSelector';
-
+import styles from '../styles/styles';
 
 export default function NavBar() {
   const {setUser, currentDashboard, setCurrentDashboard} = useContext(UserContext)
@@ -22,7 +22,7 @@ export default function NavBar() {
     <Box>
       <AppBar position="static">
         <Toolbar>
-          <Typography variant="h6" component="div"  align="left">
+          <Typography sx={styles.taskMasterLogo} variant="h6" component="div"  align="left">
               TaskMaster
           </Typography>
           {currentDashboard ? <DashboardSelector/> : <></>}

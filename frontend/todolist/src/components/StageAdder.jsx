@@ -5,6 +5,8 @@ import {actualizarCamposForm} from  "../utils/formFunctions"
 import { createStageFromDashboard } from "../utils/createData";
 import UserContext from "../context/UserContext"
 import styles from '../styles/styles';
+import Grow from '@mui/material/Grow';
+
 
 export default function StageAdder() {
   const {addStageRender, currentDashboard} = useContext(UserContext)
@@ -47,13 +49,15 @@ export default function StageAdder() {
   return (
     <>
       {/* tarea */}
-      <Card sx={styles.stageAdder}>
-          <Button sx={{padding: "1em"}} fullWidth variant="contained" color="primary" onClick={handleClickOpen} startIcon={<AddIcon/>}>
-            <Typography>
-              Agregar Stage
-            </Typography>
-          </Button>
-      </Card>
+      <Grow in={true}>
+        <Card sx={styles.stageAdder}>
+            <Button sx={{padding: "1em"}} fullWidth variant="contained" color="primary" onClick={handleClickOpen} startIcon={<AddIcon/>}>
+              <Typography>
+                Agregar Stage
+              </Typography>
+            </Button>
+        </Card>
+      </Grow>
 
       {/* Menu que se abre */}
       <Dialog open={open} onClose={handleClose} fullWidth={true} maxWidth="sm">
