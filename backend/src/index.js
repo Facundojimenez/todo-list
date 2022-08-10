@@ -47,6 +47,6 @@ app.use("/api/stages", stagesRoutes);
  /* -------------------------------- */
 
 
-app.listen(process.env.SERVER_PORT, (req, res) => {
+app.listen(process.env.SERVER_PORT || process.env.PORT, (req, res) => {
     console.log(`serve iniciado correctamente en el puerto ${process.env.SERVER_PORT}` )
 })
