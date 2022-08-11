@@ -59,7 +59,7 @@ export default function  Stage({stageId}) {
     return(
         <>  
             <Grow in={true}>
-                <Card sx={{ minWidth: "345px", bgcolor: "#ebebeb" }}>
+                <Card sx={styles.stageContainer}>
                     {/* Encabezado del stage */}
                     <CardHeader
                         action={
@@ -75,7 +75,7 @@ export default function  Stage({stageId}) {
                     <Divider sx={{ my: 0.5 }} />
                     {/* Lista de tasks */}
                     <CardContent>
-                        <Stack sx={styles.stageContainer} spacing={2}>
+                        <Stack spacing={2}>
                             {
                                 tasks.map(task => {
                                     return(

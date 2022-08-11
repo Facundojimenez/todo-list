@@ -4,7 +4,7 @@ import { updateTaskFromStage } from "../utils/updateData";
 import { deleteTaskFromStage } from '../utils/deleteData';
 import UserContext from "../context/UserContext"
 import Fade from '@mui/material/Fade';
-
+import styles from '../styles/styles';
 
 export default function Task(props) {
   const {deleteTaskRender} = useContext(UserContext)
@@ -56,7 +56,7 @@ export default function Task(props) {
               {taskData.description}
             </Typography>
           </CardContent>
-          <Box sx={{display: "flex", justifyContent: "flex-end"}}>
+          <Box sx={styles.taskEditContainer}>
             <CardActions>
               <Button size="small" onClick={handleClickOpen}>Editar</Button>
             </CardActions>

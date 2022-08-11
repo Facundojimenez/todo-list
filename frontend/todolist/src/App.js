@@ -29,6 +29,7 @@ function App() {
             <div className={classes.body}>
               <Routes>
                 <Route path="/login" element={<Login/>}/> 
+                <Route path="/" element={<Login/>}/> 
                 <Route path="/signup" element={<SignUp/>}/> 
                 <Route element={<PrivateRoutes/>}>
                   <Route path="/dashboard" element={<DashboardPage/>}/> 

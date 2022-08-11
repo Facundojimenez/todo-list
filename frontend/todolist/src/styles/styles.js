@@ -31,15 +31,24 @@ const styles = {
         width: "85%"
     },
     stageContainer: {
-        minHeight: "80vh"
+        minHeight: "80vh",
+        minWidth: "345px",
+        bgcolor: "#ebebeb"
     },
     stageAdder: {
         minHeight: "80vh",
         padding: "0.5em",
-        minWidth: "300px",
+        minWidth: "345px",
         bgcolor: "rgba(235,235,235, 0.8)"
     },
+    taskEditContainer: {
+        display: "flex",
+        justifyContent: "flex-end"
+    },
     dashboardPage: {
+        title:{
+            margin: "0.3em 0" 
+        },
         dashboardContainer: {
             backgroundColor: "#99c7f2"
         },

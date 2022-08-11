@@ -58,7 +58,7 @@ export default function  DashboardPage()  {
       <>
         <Box sx={styles.dashboardPage.dashboardContainer}>
           <NavBar />
-          <Typography sx={{ margin: "0.3em 0" }} variant="h2" align="center">
+          <Typography sx={styles.dashboardPage.title} variant="h2" align="center">
             {currentDashboard.title}
             <IconButton size="large" onClick={handleClickOpen}>
               <EditIcon />
@@ -106,7 +106,7 @@ export default function  DashboardPage()  {
       <>
         <NavBar />
         <Box sx={styles.dashboardPage.noDashboardContainer}>
-          <Typography variant="h2">No hay dashboards creados</Typography>
+          <Typography variant="h2" align="center">No hay dashboards creados</Typography>
           <DashboardSelector />
         </Box>
       </>
