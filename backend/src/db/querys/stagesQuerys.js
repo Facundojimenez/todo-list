@@ -1,14 +1,9 @@
 const {Stage} = require("../schemas/stagesSchemas")
 const {Task} = require("../schemas/tasksSchemas")
 
-const getAllStages_DB = async () => {
-    return await Stage.find({})
-}
 
 const getStagesFromDashboard_DB = async (dashboardId) => {
-    if(!dashboardId){
-        return {message: "Es necesario pasar el ID del dashboard como parametro"};
-    }
+
     return await Stage.find({dashboardId: dashboardId})
 }
 
@@ -103,7 +98,6 @@ const addStage_DB = async (stage) => {
 }
 
 module.exports = {
-    getAllStages_DB,
     getStagesFromDashboard_DB,
     getStageById_DB,
     updateStageById_DB,

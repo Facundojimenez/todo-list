@@ -12,6 +12,7 @@ const session = require("express-session");
 const cookieParser = require("cookie-parser");
 const MongoStore = require("connect-mongo");
 const passport = require("passport")
+const {sendError} = require("./utils/errorHandling")
 /* --------------- MIDDLEWARES ------*/
  
 app.use(cookieParser());
@@ -42,9 +43,10 @@ app.use(morgan('dev'))
 app.use("/api/users", usersRoutes);
 app.use("/api/tasks", tasksRoutes);
 app.use("/api/stages", stagesRoutes);
+app.use(sendError) //manejo de excepciones propio
 
 
- /* -------------------------------- */
+/* -------------------------------- */
 
 const PORT = process.env.PORT || process.env.SERVER_PORT
 app.listen(PORT, (req, res) => {
