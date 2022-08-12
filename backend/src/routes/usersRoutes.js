@@ -1,5 +1,5 @@
 const {Router} = require("express");
-const {getAllUsers, getUserById, searchUserByUsername, addDashboardToUser, deleteDashboardFromUser, updateDashboardFromUser,  addUser} = require("../controllers/usersControllers")
+const {getAllUsers, getUserById, searchUserByUsername, addDashboardToUser, deleteDashboardFromUser, updateDashboardFromUser} = require("../controllers/usersControllers")
 const passport = require('passport');
 const bcrypt = require('bcrypt');
 const LocalStrategy = require('passport-local').Strategy;
@@ -8,7 +8,7 @@ const router = Router();
 
 
 
-//--------------- PASS PORT ---
+//--------------- PASS PORT ---------------
 const SALT_ROUNDS = 10;
 
 passport.use("local-login", new LocalStrategy((username, password, done) => {
@@ -71,21 +71,12 @@ passport.deserializeUser(async (id, done) => {
     done(null, user);
 })
 
-const auth = (req, res, next) =>{
-    
-    if(req.isAuthenticated()){
-        return next()
-    }
-
-    res.redirect("/login/error")
-}
 
 // ------ ROUTES ----
 
 router.get("/" , getAllUsers);
 router.get("/search", searchUserByUsername);
 router.get("/:id", getUserById);
-// router.post("/", addUser); // la reemplazo por la de passport
 
 router.post("/addDashboard/:id", addDashboardToUser);
 router.put("/updateDashboard/:id", updateDashboardFromUser);

@@ -86,8 +86,12 @@ const deleteTaskFromStage = async (req, res, next) => {
 }
 
 const addStage = async (req, res, next) => {
-    const stage = await addStageService(req.body);
-    res.json(stage);
+    try{
+        const stage = await addStageService(req.body);
+        res.json(stage);
+    }catch(err){
+        next(err)
+    }
 }
 
 module.exports = {

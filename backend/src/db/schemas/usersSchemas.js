@@ -5,9 +5,18 @@ const {dashboardSchema} = require("../schemas/dashboardsSchemas")
 
 const usersSchema  = new Schema({
     _id: Number,
-    username:  String,
-    email:   String,
-    password: String,
+    username:  {
+        type: String,
+        required: true
+    },
+    email:   {
+        type: String,
+        required: true
+    },
+    password: {
+        type: String,
+        required: true
+    },
     dashboards: [dashboardSchema]
 }, { _id: false , timestamps: true});
 
